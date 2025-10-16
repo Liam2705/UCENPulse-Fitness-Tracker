@@ -16,7 +16,6 @@
 
 body {
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
 }
 
 img, picture, video, canvas, svg {
@@ -48,6 +47,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Global Styles */
 :root{
   font-family: 'Manrope', Tahoma, Geneva, Verdana, sans-serif;
-  --background-colour: F5F7FA;
+  --background-colour: #F5F7FA;
   --primary-colour: #214984;
+  --secondary-colour: #838383;
+  --accent-colour: #E9F1FF;
 }
