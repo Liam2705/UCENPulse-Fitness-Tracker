@@ -51,4 +51,6 @@ h1, h2, h3, h4, h5, h6 {
   --primary-colour: #214984;
   --secondary-colour: #838383;
   --accent-colour: #E9F1FF;
+  --border-colour: #dbd9d9d8;
+  --card-background: #ffff;
 }

@@ -1,38 +1,24 @@
-import React from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import * as React from 'react';
+import { PieChart } from '@mui/x-charts/PieChart';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
-
-export const data = {
-  labels: ['Running', 'Cycling', 'Swimming', 'Gym'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 5],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
-
-export default function PieChart() {
+export default function BasicPie() {
   return (
     <div className="pie-chart">
-        <Pie data={data} />
+      <h2 style={{}}>Activity Breakdown</h2>
+      <PieChart
+        series={[
+          {
+            data: [
+              { id: 0, value: 10, label: 'Running' },
+              { id: 1, value: 15, label: 'Swimming' },
+              { id: 2, value: 20, label: 'Cycling' },
+              
+            ],
+          },
+        ]}
+        width={400}
+        height={300}
+      />
     </div>
-
   );
-
 }

@@ -7,9 +7,10 @@ import StepsCard from '../components/StepsCard.jsx';
 import WaterCard from '../components/WaterCard.jsx';
 import CaloriesCard from '../components/CaloriesCard.jsx';
 import SleepCard from '../components/SleepCard.jsx';
-import StepsOverview from '../components/StepsOverview';
 import PieChart from '../components/PieChart.jsx';
-
+import DoughnutChart from '../components/DoughnutChart.jsx';
+import WeeklyStepsLineChart from '../components/LineChart.jsx';
+import AreaChart from '../components/AreaChart.jsx';
 
 function Dashboard() {
 
@@ -25,8 +26,10 @@ const isMobile = useMediaQuery({ query: '(max-width: 981px)' });
                         <WaterCard />
                         <CaloriesCard />
                         <SleepCard />
-                        <StepsOverview />
-
+                        <WeeklyStepsLineChart />
+                        <PieChart />
+                        <DoughnutChart />
+                        <AreaChart />
                     </div>
                 </main>
             </div>

@@ -3,7 +3,7 @@ import { AccessAlarm } from '@mui/icons-material';
 import stepsIcon from '../assets/images/steps.svg';
 
 const StepsCard = () => {
-    const steps = 2500;
+    const steps = 1200;
     const goal = 5000;
     const progress = (steps / goal) * 100;
 
