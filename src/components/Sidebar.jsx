@@ -14,10 +14,10 @@ function Sidebar() {
                 <img src={logo} alt="logo" className="logo" />
                 <ul className = "menu">
                     <h3 className="menu-title">Menu</h3>
-                    <li className="menu-item"><img src={dashboard} className="menu-icon"/><a href="#" className="menu-text">Dashboard</a></li>
-                    <li className="menu-item"><img src={logActivity} className="menu-icon"/><a href="#" className="menu-text">Log Activity</a></li>
-                    <li className="menu-item"><img src={healthMetrics} className="menu-icon"/><a href="#" className="menu-text">Health Metrics</a></li>
-                    <li className="menu-item"><img src={analytics} className="menu-icon"/><a href="#" className="menu-text">Analytics</a></li>
+                    <li className="menu-item"><img src={dashboard} className="menu-icon"/><a href="/" className="menu-text">Dashboard</a></li>
+                    <li className="menu-item"><img src={logActivity} className="menu-icon"/><a href="log-activity" className="menu-text">Log Activity</a></li>
+                    <li className="menu-item"><img src={healthMetrics} className="menu-icon"/><a href="health-metrics" className="menu-text">Health Metrics</a></li>
+                    <li className="menu-item"><img src={analytics} className="menu-icon"/><a href="analytics" className="menu-text">Analytics</a></li>
                 </ul>
             </div>
         </>

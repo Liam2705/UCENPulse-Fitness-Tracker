@@ -19,7 +19,7 @@ const isMobile = useMediaQuery({ query: '(max-width: 981px)' });
     return (
             <div className="dashboard-grid">
                 {isMobile ? <SidebarMobile /> : <Sidebar />}
-                <Header />
+                <Header pageTitle={"Welcome Back!"}/>
                 <main className="main-content">
                     <div className="content-grid">
                         <StepsCard />

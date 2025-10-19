@@ -1,10 +1,10 @@
 import React from 'react';
 import Date from '../utils/Date.jsx';
 
-function Header() {
+function Header({pageTitle}) {
     return (
         <div className="header">
-            <h3 className="header-text">Welcome Back!</h3>
+            <h3 className="header-text">{pageTitle}</h3>
             <Date />
         </div>
     );

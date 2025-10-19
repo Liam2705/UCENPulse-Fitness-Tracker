@@ -29,6 +29,8 @@
     gap: 1.5rem;
 }
 
+/* Chart Layout */
+
 .line-chart{
     grid-area: g4;
 }
@@ -52,12 +54,15 @@
     grid-row: span 1;
 }
 
-.line-chart:hover,.pie-chart:hover, .doughnut-chart:hover, .area-chart:hover {
+.line-chart:hover,.pie-chart:hover, .doughnut-chart:hover, .area-chart:hover, .steps-card:hover, .water-card:hover, .calorie-card:hover, .sleep-card:hover{
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     
 }
 
+.area-chart:hover, .steps-card:hover, .water-card:hover, .calorie-card:hover, .sleep-card:hover{
+    transition: all 0.3s ease;
+}
 
 @media (max-width: 1700px) {
     .content-grid {
@@ -74,6 +79,10 @@
 
 }
 
+.steps-card, .water-card, .calorie-card, .sleep-card{
+    height: fit-content;
+}
+
 /* Sidebar styles */
 
 .logo {
@@ -88,8 +97,9 @@
     background-color: #ffff;
     border-radius: 0 36px 36px 0;
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
-    position: sticky;
+    position: fixed;
     grid-area: sidebar;
+    height: 100vh;
 }
 
 .menu {
@@ -151,6 +161,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        position: fixed;
+        width: 100vw;
+        z-index: 1;
+        height: 80px;
     }
 
     .logo {
@@ -173,6 +187,42 @@
     }
 }
 
+@media (max-width: 625px) {
+    .content-grid {
+        grid-template-columns: repeat(1, minmax(280px, 1fr));
+        grid-template-areas:
+            'c1  '
+            'c2 '
+            'c3 '
+            'c4 '
+            'g1 '
+            'g2 '
+            'g3 '
+            'g4 '
+;
+    }
+}
+
+.water-card{
+    grid-area: c3;
+}
+
+.calorie-card{
+    grid-area: c4;
+}
+
+.sleep-card{
+    grid-area: c2;
+}
+
+.pie-chart{
+    grid-area: g2;
+}
+
+.doughnut-chart{
+    grid-area: g3;
+}
+
 /* Header styles */
 .header {
     font-family: 'Manrope', Tahoma, Geneva, Verdana, sans-serif;
@@ -184,4 +234,6 @@
     align-items: center;
     padding: 24px 32px;
     border-bottom: 1px solid var(--secondary-colour);
+    grid-area: header;
+    flex-wrap: wrap;
 }
