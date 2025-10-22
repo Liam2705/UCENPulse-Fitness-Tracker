@@ -1,6 +1,6 @@
 import { Card, CardContent, Typography, LinearProgress } from '@mui/material';
 
-const BaseCard = ({ title, value, progress, color, icon, children }) => {
+const BaseCard = ({ title, value, progress, color, icon}) => {
     return (
         <Card
             sx={{
@@ -31,7 +31,6 @@ const BaseCard = ({ title, value, progress, color, icon, children }) => {
                 <Typography variant="body2" color="white" sx={{ marginTop: 1 }}>
                     {`${(progress).toFixed(0)}% of your goals`}
                 </Typography>
-                {children}
             </CardContent>
         </Card>
     );

@@ -9,7 +9,7 @@ const SleepCard = () => {
     return (
         <div className="sleep-card">
             <BaseCard 
-                title="Sleep"
+                title="Sleep Hours"
                 value={sleep}
                 progress={progress}
                 color="#8676FE" // Your specific color

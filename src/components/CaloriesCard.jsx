@@ -9,7 +9,7 @@ const CaloriesCard = () => {
     return (
         <div className="calorie-card">
             <BaseCard 
-                title="Calories"
+                title="Calories Burned"
                 value={calories}
                 progress={progress}
                 color="#F55E80" // Your specific color

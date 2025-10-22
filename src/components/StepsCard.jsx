@@ -10,7 +10,7 @@ const StepsCard = () => {
     return (
         <div className="steps-card">
             <BaseCard 
-                title="Steps"
+                title="Steps Today"
                 value={steps}
                 progress={progress}
                 color="#1AB0B0" // Your specific color

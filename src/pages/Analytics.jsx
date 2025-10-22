@@ -4,6 +4,7 @@ import {Sidebar} from '../components/Sidebar'
 import {Header} from '../components/Header'
 import { useMediaQuery } from 'react-responsive'
 import {SidebarMobile} from '../components/SidebarMobile.jsx';
+import DataVisualization from '../components/DataVisualisation.jsx'
 
 function Analytics() {
 
@@ -14,7 +15,7 @@ function Analytics() {
                 {isMobile ? <SidebarMobile /> : <Sidebar />}
                 <Header pageTitle={"Analytics"}/>
                 <main className="main-content">
-
+                  <DataVisualization/>
                 </main>
             </div>
   )

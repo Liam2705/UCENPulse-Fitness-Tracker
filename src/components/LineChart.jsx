@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { LineChart } from '@mui/x-charts/LineChart';
-//import { faker } from '@faker-js/faker';
 
-// Helper function to get the last 7 days as Date objects
 const getPastSevenDays = () => {
   const dates = [];
   for (let i = 6; i >= 0; i--) {

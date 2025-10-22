@@ -9,7 +9,7 @@ const WaterCard = () => {
     return (
         <div className="water-card">
             <BaseCard 
-                title="Water"
+                title="Water Intake"
                 value={water}
                 progress={progress}
                 color="#FF7443" // Your specific color
