@@ -1,8 +1,9 @@
 import BaseCard from './BaseCard';
-import waterIcon from '../assets/images/water.svg';
+import waterIcon from '../../assets/images/water.svg';
+import getMetrics from '../../utils/getMetrics';
 
 const WaterCard = () => {
-    const water = 500;
+    const water = getMetrics('waterIntake') || 0;
     const goal = 3000;
     const progress = (water / goal) * 100;
 

@@ -1,8 +1,9 @@
 import BaseCard from './BaseCard';
-import sleepIcon from '../assets/images/sleep.svg';
+import sleepIcon from '../../assets/images/sleep.svg';
+import getMetrics from '../../utils/getMetrics';
 
 const SleepCard = () => {
-    const sleep = 6;
+    const sleep = getMetrics('sleepHours') || 0;
     const goal = 8;
     const progress = (sleep / goal) * 100;
 

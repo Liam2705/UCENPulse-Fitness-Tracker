@@ -1,11 +1,10 @@
 import React from 'react'
 import '../styles/Dashboard.css'
-import '../styles/LogActivity.css'
-import {Sidebar} from '../components/Sidebar'
+import {Sidebar} from '../components/nav/Sidebar'
 import {Header} from '../components/Header'
 import { useMediaQuery } from 'react-responsive'
-import {SidebarMobile} from '../components/SidebarMobile.jsx';
-import ActivityForm from '../components/ActivityForm.jsx';
+import {SidebarMobile} from '../components/nav/SidebarMobile.jsx';
+import ActivityForm from '../components/forms/ActivityForm.jsx';
 
 function LogActivity() {
 

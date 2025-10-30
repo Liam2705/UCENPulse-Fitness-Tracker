@@ -1,9 +1,10 @@
 import BaseCard from './BaseCard';
-import caloriesIcon from '../assets/images/calories.svg';
+import caloriesIcon from '../../assets/images/calories.svg';
+import getMetrics from '../../utils/getMetrics';
 
 const CaloriesCard = () => {
-    const calories = 1300;
-    const goal = 3000;
+    const calories = getMetrics('caloriesBurned') || 0;
+    const goal = 500;
     const progress = (calories / goal) * 100;
 
     return (

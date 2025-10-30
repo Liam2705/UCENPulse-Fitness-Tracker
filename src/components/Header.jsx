@@ -1,13 +1,13 @@
 import React from 'react';
 import Date from '../utils/Date.jsx';
 
-function Header({pageTitle}) {
+function Header({ pageTitle }) {
     return (
-        <div className="header">
-            <h3 className="header-text">{pageTitle}</h3>
+        <header className="header">
+            <h1 className="header-text">{pageTitle}</h1>
             <Date />
-        </div>
+        </header>
     );
 }
 
-export {Header};
+export { Header };

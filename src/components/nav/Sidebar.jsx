@@ -1,0 +1,27 @@
+import logo from '../../assets/images/logo.svg';
+import dashboard from '../../assets/images/dashboard.svg';
+import logActivity from '../../assets/images/log-activity.svg';
+import healthMetrics from '../../assets/images/health-metrics.svg';
+import analytics from '../../assets/images/analytics.svg';
+import '../../styles/Dashboard.css';
+import MediaQuery from 'react-responsive';
+import {SidebarMobile} from './SidebarMobile.jsx';
+
+function Sidebar() {
+    return (
+        <>
+            <nav className="sidebar">
+                <img src={logo} alt="logo" className="logo" />
+                <ul className = "menu">
+                    <h3 className="menu-title">Menu</h3>
+                    <a href="/" className="menu-text"><li className="menu-item"><img src={dashboard} className="menu-icon"/><p className="menu-text">Dashboard</p></li></a>
+                    <a href="log-activity" className="menu-text"><li className="menu-item"><img src={logActivity} className="menu-icon"/><a href="log-activity" className="menu-text">Log Activity</a></li></a>
+                    <a href="health-metrics" className="menu-text"><li className="menu-item"><img src={healthMetrics} className="menu-icon"/><a href="health-metrics" className="menu-text">Health Metrics</a></li></a>
+                    <a href="analytics" className="menu-text"><li className="menu-item"><img src={analytics} className="menu-icon"/><a href="analytics" className="menu-text">Analytics</a></li></a>
+                </ul>
+            </nav>
+        </>
+    );
+}
+
+export {Sidebar};

@@ -26,34 +26,34 @@ const daysData = getPastSevenDays();
 export default function WeeklyStepsLineChart() {
   return (
     <div className="line-chart">
-        <h2>Weekly Steps Overview</h2>
-        <LineChart
+      <h2>Weekly Steps Overview</h2>
+      <LineChart
         xAxis={[
-            {
+          {
             scaleType: 'band',
             data: daysData,
             valueFormatter: (date) => {
-                const day = date.getDate();
-                const month = date.toLocaleString('en-US', { month: 'short' });
-                return `${day}${getOrdinalSuffix(day)} ${month}`;
+              const day = date.getDate();
+              const month = date.toLocaleString('en-US', { month: 'short' });
+              return `${day}${getOrdinalSuffix(day)} ${month}`;
             },
-            },
+          },
         ]}
         yAxis={[
-            {
+          {
             valueFormatter: (value) => `${(value * 1000).toLocaleString()}`, // Format as 10,000
-            },
+          },
         ]}
         series={[
-            {
+          {
             data: temporaryStepsData,
             valueFormatter: (value) => `${(value * 1000).toLocaleString()}`, // Format tooltip values as 2,000
             connectNulls: true,
-            },
+          },
         ]}
         height={300}
         margin={{ left: 0, right: 0, top: 30, bottom: 30 }}
-        />
+      />
     </div>
   );
 }

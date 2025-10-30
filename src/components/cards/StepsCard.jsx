@@ -1,10 +1,12 @@
 import BaseCard from './BaseCard';
-import { AccessAlarm } from '@mui/icons-material';
-import stepsIcon from '../assets/images/steps.svg';
+import stepsIcon from '../../assets/images/steps.svg';
+import getMetrics from '../../utils/getMetrics';
 
 const StepsCard = () => {
-    const steps = 1200;
-    const goal = 5000;
+
+    let steps = getMetrics('steps');
+    
+    const goal = 10000;
     const progress = (steps / goal) * 100;
 
     return (

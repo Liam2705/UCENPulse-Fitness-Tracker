@@ -1,10 +1,10 @@
 import React from 'react'
 import '../styles/Dashboard.css'
-import {Sidebar} from '../components/Sidebar'
-import {Header} from '../components/Header'
+import { Sidebar } from '../components/nav/Sidebar'
+import { Header } from '../components/Header'
 import { useMediaQuery } from 'react-responsive'
-import {SidebarMobile} from '../components/SidebarMobile.jsx';
-import HealthMetricTracker from '../components/HealthMetricTracker.jsx'
+import { SidebarMobile } from '../components/nav/SidebarMobile.jsx';
+import HealthMetricTracker from '../components/forms/HealthMetricTracker.jsx'
 
 
 function HealthMetrics() {
@@ -13,12 +13,12 @@ function HealthMetrics() {
 
   return (
     <div className="dashboard-grid">
-                {isMobile ? <SidebarMobile /> : <Sidebar />}
-                <Header pageTitle={"Health Metrics"}/>
-                <main className="main-content">
-                  <HealthMetricTracker/>
-                </main>
-            </div>
+      {isMobile ? <SidebarMobile /> : <Sidebar />}
+      <Header pageTitle={"Health Metrics"} />
+      <main className="main-content">
+        <HealthMetricTracker />
+      </main>
+    </div>
   )
 }
 

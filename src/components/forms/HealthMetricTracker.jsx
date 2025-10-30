@@ -12,6 +12,7 @@ import {
   Snackbar,
 } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
+import getMetrics from '../../utils/getMetrics';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -45,12 +46,7 @@ const HealthMetricTracker = () => {
   const handleClose = () => {
     setError('');
   };
-
-  const getMetrics = (metric) =>{
-    const metricsData = JSON.parse(localStorage.getItem('healthMetrics')) ;
-    return (metricsData[metric]);
-  }
-
+  
   
   return (
     <Container component="main" padding="10px">

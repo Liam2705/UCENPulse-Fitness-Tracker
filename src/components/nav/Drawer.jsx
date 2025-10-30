@@ -9,11 +9,11 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import menu from '../assets/images/menu.svg';
-import dashboard from '../assets/images/dashboard.svg';
-import logActivity from '../assets/images/log-activity.svg';
-import healthMetrics from '../assets/images/health-metrics.svg';
-import analytics from '../assets/images/analytics.svg';
+import menu from '../../assets/images/menu.svg';
+import dashboard from '../../assets/images/dashboard.svg';
+import logActivity from '../../assets/images/log-activity.svg';
+import healthMetrics from '../../assets/images/health-metrics.svg';
+import analytics from '../../assets/images/analytics.svg';
 
 export default function TemporaryDrawer() {
   const [open, setOpen] = React.useState(false);

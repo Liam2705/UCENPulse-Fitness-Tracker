@@ -44,7 +44,7 @@ const ActivityForm = () => {
 
     const existingActivities = JSON.parse(localStorage.getItem('activities')) || [];
     existingActivities.push(activityData);
-    
+
     localStorage.setItem('activities', JSON.stringify(existingActivities));
 
     setActivityType('');
@@ -67,61 +67,61 @@ const ActivityForm = () => {
           Record your workout and activities to track your fitness progress.
         </Typography>
         <form onSubmit={handleSubmit}>
-            <TextField
-                select
-                fullWidth
-                label="Activity Type *"
-                value={activityType}
-                onChange={(e) => setActivityType(e.target.value)}
-                margin="normal"
-                error={!!error}
-                helperText={error.includes('ActivityType') ? error : ''}
-            >
-                <MenuItem value="Running">Running</MenuItem>
-                <MenuItem value="Cycling">Cycling</MenuItem>
-                <MenuItem value="Swimming">Swimming</MenuItem>
-                <MenuItem value="Gym">Gym</MenuItem>
-            </TextField>
+          <TextField
+            select
+            fullWidth
+            label="Activity Type *"
+            value={activityType}
+            onChange={(e) => setActivityType(e.target.value)}
+            margin="normal"
+            error={!!error}
+            helperText={error.includes('ActivityType') ? error : ''}
+          >
+            <MenuItem value="Running">Running</MenuItem>
+            <MenuItem value="Cycling">Cycling</MenuItem>
+            <MenuItem value="Swimming">Swimming</MenuItem>
+            <MenuItem value="Gym">Gym</MenuItem>
+          </TextField>
 
-            <TextField
-                type="number"
-                fullWidth
-                label="Duration (minutes) *"
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
-                margin="normal"
-                error={!!error}
-                helperText={error.includes('Duration') ? error : ''}
-            />
+          <TextField
+            type="number"
+            fullWidth
+            label="Duration (minutes) *"
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
+            margin="normal"
+            error={!!error}
+            helperText={error.includes('Duration') ? error : ''}
+          />
 
-            <TextField
-                type="date"
-                fullWidth
-                label="Date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                margin="normal"
-                disabled
-            />
+          <TextField
+            type="date"
+            fullWidth
+            label="Date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            margin="normal"
+            disabled
+          />
 
-            <TextField
-                fullWidth
-                label="Notes (optional)"
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                margin="normal"
-                multiline
-                rows={4}
-            />
-            
-            <Button
-                type="submit"
-                variant="contained"
-                fullWidth
-                style={{ marginTop: '16px', backgroundColor: "var(--primary-colour)"}}
-            >
-                Log Activity
-            </Button>
+          <TextField
+            fullWidth
+            label="Notes (optional)"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            margin="normal"
+            multiline
+            rows={4}
+          />
+
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            style={{ marginTop: '16px', backgroundColor: "var(--primary-colour)" }}
+          >
+            Log Activity
+          </Button>
         </form>
       </Paper>
 
