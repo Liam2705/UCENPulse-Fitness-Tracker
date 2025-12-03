@@ -20,34 +20,47 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const HealthMetricTracker = () => {
 
-  const [steps, setSteps] = useState(0);
-  const [waterIntake, setWaterIntake] = useState(0);
-  const [sleepHours, setSleepHours] = useState(0);
-  const [caloriesBurned, setCaloriesBurned] = useState(0);
+  const [steps, setSteps] = useState('');
+  const [waterIntake, setWaterIntake] = useState('');
+  const [sleepHours, setSleepHours] = useState('');
+  const [caloriesBurned, setCaloriesBurned] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const currentDate = new Date().toISOString().split('T')[0];
-    const healthMetrics = {currentDate, steps, waterIntake, sleepHours,caloriesBurned};
+
+    if (steps === '' || waterIntake === '' || sleepHours === '' || caloriesBurned === '') {
+      setError('Fields cannot be empty. Please fill in all metrics.');
+      return;
+    }
+
+    const healthMetrics = { date: currentDate, steps, waterIntake, sleepHours, caloriesBurned };
     console.log(healthMetrics);
 
-    const metrics = [];
-    metrics.push(healthMetrics);
-    localStorage.setItem('healthMetrics', JSON.stringify(healthMetrics));
+    const existingMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
+    const todayMetricsIndex = existingMetrics.findIndex(metric => metric.date === currentDate);
 
-    setSteps(0);
-    setWaterIntake(0);
-    setSleepHours(0);
-    setCaloriesBurned(0);  
+    if (todayMetricsIndex !== -1) {
+      existingMetrics[todayMetricsIndex] = healthMetrics; // Update
+    } else {
+      existingMetrics.push(healthMetrics); // Add new entry
+    }
+
+    localStorage.setItem('healthMetrics', JSON.stringify(existingMetrics));
+
+    setSteps('');
+    setWaterIntake('');
+    setSleepHours('');
+    setCaloriesBurned('');
   };
 
   const handleClose = () => {
     setError('');
   };
-  
-  
+
+
   return (
     <Container component="main" padding="10px">
       <Paper elevation={3} style={{ padding: '26px' }}>
@@ -58,51 +71,51 @@ const HealthMetricTracker = () => {
           Track your daily health and wellness metrics.
         </Typography>
         <form onSubmit={handleSubmit}>
-            <TextField
-                type="number"
-                fullWidth
-                label="Steps *"
-                value={steps}
-                onChange={(e) => setSteps(e.target.value)}
-                margin="normal"
-            >
-            </TextField>
+          <TextField
+            type="number"
+            fullWidth
+            label="Steps *"
+            value={steps}
+            onChange={(e) => setSteps(e.target.value)}
+            margin="normal"
+          >
+          </TextField>
 
-            <TextField
-                type="number"
-                fullWidth
-                label="Water Intake"
-                value={waterIntake}
-                onChange={(e) => setWaterIntake(e.target.value)}
-                margin="normal"
-            />
+          <TextField
+            type="number"
+            fullWidth
+            label="Water Intake *"
+            value={waterIntake}
+            onChange={(e) => setWaterIntake(e.target.value)}
+            margin="normal"
+          />
 
-            <TextField
-                type="number"
-                fullWidth
-                label="Hours of Sleep"
-                value={sleepHours}
-                onChange={(e) => setSleepHours(e.target.value)}
-                margin="normal"
-            />
+          <TextField
+            type="number"
+            fullWidth
+            label="Hours of Sleep *"
+            value={sleepHours}
+            onChange={(e) => setSleepHours(e.target.value)}
+            margin="normal"
+          />
 
-            <TextField
-                type="number"
-                fullWidth
-                label="Calories Burned"
-                value={caloriesBurned}
-                onChange={(e) => setCaloriesBurned(e.target.value)}
-                margin="normal"
-            />
-            
-            <Button
-                type="submit"
-                variant="contained"
-                fullWidth
-                style={{ marginTop: '16px', backgroundColor: "var(--primary-colour)"}}
-            >
-                Save Metrics
-            </Button>
+          <TextField
+            type="number"
+            fullWidth
+            label="Calories Burned *"
+            value={caloriesBurned}
+            onChange={(e) => setCaloriesBurned(e.target.value)}
+            margin="normal"
+          />
+
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            style={{ marginTop: '16px', backgroundColor: "var(--primary-colour)" }}
+          >
+            Save Metrics
+          </Button>
         </form>
       </Paper>
 
@@ -110,8 +123,8 @@ const HealthMetricTracker = () => {
         <Typography variant="h5" align="left" color="var(--primary-colour)" gutterBottom>
           Today's Summary
         </Typography>
-        <Grid container spacing={3} sx={{justifyContent: "center", alignItems: "center",}}>
-          <Grid size={{sm:"auto", lg:3}}>
+        <Grid container spacing={3} sx={{ justifyContent: "center", alignItems: "center", }}>
+          <Grid size={{ sm: "auto", lg: 3 }}>
             <Card>
               <CardContent>
                 <Typography variant="h6" color="var(--primary-colour)">{getMetrics('steps')} steps</Typography>
@@ -119,7 +132,7 @@ const HealthMetricTracker = () => {
               </CardContent>
             </Card>
           </Grid >
-          <Grid size={{sm:"auto", lg:3}}>
+          <Grid size={{ sm: "auto", lg: 3 }}>
             <Card>
               <CardContent>
                 <Typography variant="h6" color="var(--primary-colour)">{getMetrics('waterIntake')} ml</Typography>
@@ -127,15 +140,15 @@ const HealthMetricTracker = () => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid size={{sm:"auto", lg:3}}>
+          <Grid size={{ sm: "auto", lg: 3 }}>
             <Card>
               <CardContent>
                 <Typography variant="h6" color="var(--primary-colour)">{getMetrics('sleepHours')} hours</Typography>
                 <Typography color="var(--primary-colour)">sleep</Typography>
               </CardContent>
             </Card>
-          </Grid>  
-          <Grid size={{sm:"auto", lg:3}}>
+          </Grid>
+          <Grid size={{ sm: "auto", lg: 3 }}>
             <Card>
               <CardContent>
                 <Typography variant="h6" color="var(--primary-colour)">{getMetrics('caloriesBurned')} calories</Typography>

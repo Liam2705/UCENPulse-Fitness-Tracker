@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { LineChart } from '@mui/x-charts/LineChart';
 
-const getPastSevenDays = () => {
+const getPastDays = (numDays) => {
   const dates = [];
-  for (let i = 6; i >= 0; i--) {
+  for (let i = numDays - 1; i >= 0; i--) {
     const date = new Date();
     date.setDate(date.getDate() - i);
     dates.push(date);
@@ -19,14 +19,14 @@ const getOrdinalSuffix = (n) => {
 };
 
 // Temporary data for steps (in thousands)
-const temporaryStepsData = [5, 7, 6, 9, 8, 12, 10]; // e.g., 5 means 5000 steps
+const temporaryStepsData = [5, 7, 6, 9, 8, 12, 10];
 
-const daysData = getPastSevenDays();
+export default function CustomLineChart({label, numDays}) {
+  const daysData = getPastDays(numDays);
 
-export default function WeeklyStepsLineChart() {
   return (
     <div className="line-chart">
-      <h2>Weekly Steps Overview</h2>
+      <h2>{label}</h2>
       <LineChart
         xAxis={[
           {

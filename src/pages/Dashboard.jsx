@@ -9,7 +9,7 @@ import CaloriesCard from '../components/cards/CaloriesCard.jsx';
 import SleepCard from '../components/cards/SleepCard.jsx';
 import PieChart from '../components/charts/PieChart.jsx';
 import DoughnutChart from '../components/charts/DoughnutChart.jsx';
-import WeeklyStepsLineChart from '../components/charts/LineChart.jsx';
+import CustomLineChart from '../components/charts/LineChart.jsx';
 import AreaChart from '../components/charts/AreaChart.jsx';
 
 function Dashboard() {
@@ -26,7 +26,7 @@ function Dashboard() {
                     <WaterCard />
                     <CaloriesCard />
                     <SleepCard />
-                    <WeeklyStepsLineChart />
+                    <CustomLineChart label = {"Weekly Steps Overview"} numDays={7}/>
                     <PieChart />
                     <DoughnutChart />
                     <AreaChart />
