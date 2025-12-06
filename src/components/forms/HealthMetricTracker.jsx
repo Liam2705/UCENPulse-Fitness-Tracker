@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { useEffect } from 'react';
 import {
   Container,
   TextField,
@@ -26,34 +27,45 @@ const HealthMetricTracker = () => {
   const [caloriesBurned, setCaloriesBurned] = useState('');
   const [error, setError] = useState('');
 
+
+  const currentDate = new Date().toISOString().split('T')[0];
+  const existingMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
+
+  const todayMetrics = existingMetrics.find(metric => metric.date === currentDate);
+
+  if (!todayMetrics) {
+    const newMetrics = { date: currentDate, steps: 0, waterIntake: 0, sleepHours: 0, caloriesBurned: 0 };
+    existingMetrics.push(newMetrics);
+    localStorage.setItem('healthMetrics', JSON.stringify(existingMetrics));
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const currentDate = new Date().toISOString().split('T')[0];
 
-    if (steps === '' || waterIntake === '' || sleepHours === '' || caloriesBurned === '') {
-      setError('Fields cannot be empty. Please fill in all metrics.');
+    if (steps < 0 || waterIntake < 0 || sleepHours < 0 || caloriesBurned < 0) {
+      setError('Fields cannot be negative. Please fill in all metrics.');
       return;
     }
 
     const healthMetrics = { date: currentDate, steps, waterIntake, sleepHours, caloriesBurned };
-    console.log(healthMetrics);
-
     const existingMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
     const todayMetricsIndex = existingMetrics.findIndex(metric => metric.date === currentDate);
 
     if (todayMetricsIndex !== -1) {
-      existingMetrics[todayMetricsIndex] = healthMetrics; // Update
+      existingMetrics[todayMetricsIndex] = healthMetrics;
     } else {
-      existingMetrics.push(healthMetrics); // Add new entry
+      const newMetrics = { date: currentDate, steps, waterIntake, sleepHours, caloriesBurned };
+      existingMetrics.push(newMetrics);
     }
 
     localStorage.setItem('healthMetrics', JSON.stringify(existingMetrics));
 
-    setSteps('');
-    setWaterIntake('');
-    setSleepHours('');
-    setCaloriesBurned('');
+    setSteps(0);
+    setWaterIntake(0);
+    setSleepHours(0);
+    setCaloriesBurned(0);
   };
 
   const handleClose = () => {

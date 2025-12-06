@@ -3,7 +3,7 @@ import waterIcon from '../../assets/images/water.svg';
 import getMetrics from '../../utils/getMetrics';
 
 const WaterCard = () => {
-    const water = getMetrics('waterIntake') || 0;
+    const water = getMetrics('waterIntake');
     const goal = 3000;
     const progress = (water / goal) * 100;
 
@@ -13,7 +13,7 @@ const WaterCard = () => {
                 title="Water Intake"
                 value={water}
                 progress={progress}
-                color="#FF7443" // Your specific color
+                color="#FF7443"
                 icon={<img src={waterIcon} alt="Steps icon" style={{ width: 24, height: 24, marginRight: 8 }} />}
             >
             </BaseCard>

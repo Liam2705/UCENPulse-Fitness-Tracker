@@ -3,7 +3,7 @@ import sleepIcon from '../../assets/images/sleep.svg';
 import getMetrics from '../../utils/getMetrics';
 
 const SleepCard = () => {
-    const sleep = getMetrics('sleepHours') || 0;
+    const sleep = getMetrics('sleepHours');
     const goal = 8;
     const progress = (sleep / goal) * 100;
 
@@ -13,7 +13,7 @@ const SleepCard = () => {
                 title="Sleep Hours"
                 value={sleep}
                 progress={progress}
-                color="#8676FE" // Your specific color
+                color="#8676FE"
                 icon={<img src={sleepIcon} alt="Steps icon" style={{ width: 24, height: 24, marginRight: 8 }} />}
             >
             </BaseCard>

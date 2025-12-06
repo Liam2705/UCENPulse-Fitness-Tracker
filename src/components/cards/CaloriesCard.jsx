@@ -3,7 +3,7 @@ import caloriesIcon from '../../assets/images/calories.svg';
 import getMetrics from '../../utils/getMetrics';
 
 const CaloriesCard = () => {
-    const calories = getMetrics('caloriesBurned') || 0;
+    const calories = getMetrics('caloriesBurned');
     const goal = 500;
     const progress = (calories / goal) * 100;
 
@@ -13,7 +13,7 @@ const CaloriesCard = () => {
                 title="Calories Burned"
                 value={calories}
                 progress={progress}
-                color="#F55E80" // Your specific color
+                color="#F55E80"
                 icon={<img src={caloriesIcon} alt="Steps icon" style={{ width: 24, height: 24, marginRight: 8 }} />}
             >
             </BaseCard>

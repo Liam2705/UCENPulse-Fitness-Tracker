@@ -17,11 +17,11 @@ const BaseCard = ({ title, value, progress, color, icon}) => {
         >
             <CardContent>
                 <Typography variant="h6" component="div" sx={{ display: 'flex', alignItems: 'center' }}>
-                    {icon} {}
+                    {icon}
                     {title}
                 </Typography>
                 <Typography variant="h4" component="div">
-                    {value.toLocaleString()} {/* Format number */}
+                    {value}
                 </Typography>
                 <LinearProgress 
                     variant="determinate" 

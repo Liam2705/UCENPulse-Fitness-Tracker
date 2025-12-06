@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import { LineChart } from '@mui/x-charts/LineChart';
 
 const getPastDays = (numDays) => {
