@@ -100,9 +100,11 @@
     position: fixed;
     grid-area: sidebar;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.menu {
+.menu, .account-menu {
     list-style: none;
     font-family: 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
@@ -143,6 +145,33 @@
     text-transform: uppercase;
     margin: 24px 0 12px 4px;
     color: var(--primary-colour);
+}
+
+.settings-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.settings-button:hover {
+    background-color: var(--accent-colour);
+}
+
+.account-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.settings{
+    margin-left: auto;
+}
+
+.account-menu{
+    margin-top: auto;
+    padding-left: 40px;
 }
 
 /* Mobile Sidebar styles */

@@ -16,6 +16,12 @@ function Dashboard() {
 
     const isMobile = useMediaQuery({ query: '(max-width: 981px)' });
 
+    if (localStorage.getItem("metricGoals") === null) {
+        const metricGoals = { stepsGoal: 10000, waterIntakeGoal: 2000, caloriesBurnedGoal: 500, sleepHoursGoal: 8 };
+        localStorage.setItem("metricGoals", JSON.stringify(metricGoals));
+    }
+
+
     return (
         <div className="dashboard-grid">
             {isMobile ? <SidebarMobile /> : <Sidebar />}
@@ -26,10 +32,10 @@ function Dashboard() {
                     <WaterCard />
                     <CaloriesCard />
                     <SleepCard />
-                    <CustomLineChart label = {"Weekly Steps Overview"} numDays={7} metricType={"steps"}/>
-                    <PieChart numDays={7}/>
-                    <DoughnutChart numDays={7}/>
-                    <AreaChart label = {"Calories Burned Overview"} numDays={7} metricType={"steps"}/>
+                    <CustomLineChart label={"Weekly Steps Overview"} numDays={7} metricType={"steps"} />
+                    <PieChart numDays={7} />
+                    <DoughnutChart numDays={7} />
+                    <AreaChart label={"Calories Burned Overview"} numDays={7} metricType={"caloriesBurned"} />
                 </div>
             </main>
         </div>

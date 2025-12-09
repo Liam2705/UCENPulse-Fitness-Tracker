@@ -4,7 +4,7 @@ import getMetrics from '../../utils/getMetrics';
 
 const SleepCard = () => {
     const sleep = getMetrics('sleepHours');
-    const goal = 8;
+    const goal = localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).sleepHoursGoal : 8;
     const progress = (sleep / goal) * 100;
 
     return (

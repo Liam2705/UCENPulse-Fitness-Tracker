@@ -5,8 +5,7 @@ import getMetrics from '../../utils/getMetrics';
 const StepsCard = () => {
 
     let steps = getMetrics('steps');
-    
-    const goal = 10000;
+    const goal = localStorage.getItem("metricGoals") ? JSON.parse(localStorage.getItem("metricGoals")).stepsGoal : 10000;
     const progress = (steps / goal) * 100;
 
     return (

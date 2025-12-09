@@ -4,7 +4,7 @@ import getMetrics from '../../utils/getMetrics';
 
 const CaloriesCard = () => {
     const calories = getMetrics('caloriesBurned');
-    const goal = 500;
+    const goal = localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).caloriesBurnedGoal : 100;
     const progress = (calories / goal) * 100;
 
     return (

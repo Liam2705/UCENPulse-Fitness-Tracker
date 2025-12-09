@@ -4,7 +4,7 @@ import getMetrics from '../../utils/getMetrics';
 
 const WaterCard = () => {
     const water = getMetrics('waterIntake');
-    const goal = 3000;
+    const goal = localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).waterIntakeGoal : 2500;
     const progress = (water / goal) * 100;
 
     return (
