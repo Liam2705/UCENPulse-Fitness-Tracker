@@ -34,7 +34,7 @@ const AccountMenu = () => {
                 <h3 className="menu-title">User</h3>
                 <div className="account-info">
                     <img src={account} alt="account-icon" />
-                    <p className="menu-text">John Doe</p>
+                    <p className="menu-text">John Smith</p>
                     <div className="settings">
                         <button className="settings-button" onClick={handleOpen}>
                             <img src={settings} className="settings-icon" />
