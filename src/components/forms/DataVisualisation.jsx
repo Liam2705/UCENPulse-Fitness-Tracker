@@ -12,9 +12,9 @@ import {
   Tabs,
   Tab,
 } from '@mui/material';
-import CustomLineChart from '../components/charts/LineChart.jsx';
-import DoughnutChart from '../components/charts/DoughnutChart.jsx';
-import BasicPie from '../components/charts/PieChart.jsx';
+import CustomLineChart from '../charts/LineChart.jsx';
+import DoughnutChart from '../charts/DoughnutChart.jsx';
+import BasicPie from '../charts/PieChart.jsx';
 const DataVisualization = () => {
 
   const [value, setValue] = React.useState(0);

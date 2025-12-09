@@ -1,6 +1,6 @@
 import { Sidebar } from '../components/nav/Sidebar.jsx';
 import { SidebarMobile } from '../components/nav/SidebarMobile.jsx';
-import { Header } from '../components/Header.jsx';
+import { Header } from '../components/nav/Header.jsx';
 import '../styles/Dashboard.css';
 import { useMediaQuery } from 'react-responsive'
 import StepsCard from '../components/cards/StepsCard.jsx';

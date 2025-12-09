@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/Dashboard.css'
 import {Sidebar} from '../components/nav/Sidebar'
-import {Header} from '../components/Header'
+import {Header} from '../components/nav/Header'
 import { useMediaQuery } from 'react-responsive'
 import {SidebarMobile} from '../components/nav/SidebarMobile.jsx';
 import ActivityForm from '../components/forms/ActivityForm.jsx';
