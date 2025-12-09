@@ -26,7 +26,7 @@ function Dashboard() {
                     <WaterCard />
                     <CaloriesCard />
                     <SleepCard />
-                    <CustomLineChart label = {"Weekly Steps Overview"} numDays={7}/>
+                    <CustomLineChart label = {"Weekly Steps Overview"} numDays={7} metricType={"steps"}/>
                     <PieChart />
                     <DoughnutChart />
                     <AreaChart />

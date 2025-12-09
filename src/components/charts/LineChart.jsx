@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { LineChart } from '@mui/x-charts/LineChart';
 
 const getPastDays = (numDays) => {
@@ -19,10 +19,23 @@ const getOrdinalSuffix = (n) => {
   return s[(v - 20) % 10] || s[v] || s[0];
 };
 
-// Temporary data for steps (in thousands)
-const temporaryStepsData = [5, 7, 6, 9, 8, 12, 10];
+export default function CustomLineChart({ label, numDays = 7, metricType }) {
+  const [metricData, setMetricData] = useState([]);
 
-export default function CustomLineChart({label, numDays}) {
+  // Load health metric from localStorage based on metricType and numDays
+  useEffect(() => {
+    const existingMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
+    const pastDays = getPastDays(numDays);
+    
+    const dataForPastDays = pastDays.map(date => {
+      const formattedDate = date.toISOString().split('T')[0];
+      const metrics = existingMetrics.find(metric => metric.date === formattedDate);
+      return metrics ? metrics[metricType] : 0;
+    });
+
+    setMetricData(dataForPastDays);
+  }, [numDays, metricType]);
+
   const daysData = getPastDays(numDays);
 
   return (
@@ -42,13 +55,17 @@ export default function CustomLineChart({label, numDays}) {
         ]}
         yAxis={[
           {
-            valueFormatter: (value) => `${(value * 1000).toLocaleString()}`, // Format as 10,000
+            valueFormatter: (value) => {
+              return metricType === 'waterIntake' ? `${value} ml` : `${value.toLocaleString()} ${metricType}`;
+            },
           },
         ]}
         series={[
           {
-            data: temporaryStepsData,
-            valueFormatter: (value) => `${(value * 1000).toLocaleString()}`, // Format tooltip values as 2,000
+            data: metricData,
+            valueFormatter: (value) => {
+              return metricType === 'waterIntake' ? `${value} ml` : `${value.toLocaleString()} ${metricType}`;
+            },
             connectNulls: true,
           },
         ]}

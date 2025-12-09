@@ -9,9 +9,10 @@ export default function BasicPie() {
         series={[
           {
             data: [
-              { id: 0, value: 10, label: 'Running' },
-              { id: 1, value: 15, label: 'Swimming' },
-              { id: 2, value: 20, label: 'Cycling' },
+              { id: 0, value: 1, label: 'Running' },
+              { id: 1, value: 2, label: 'Swimming' },
+              { id: 2, value: 2, label: 'Cycling' },
+              { id: 3, value: 3, label: 'Gym' },
               
             ],
           },
