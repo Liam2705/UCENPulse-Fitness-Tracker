@@ -40,7 +40,7 @@ export default function DoughnutChart({ numDays = 7 }) {
 
   return (
     <div className="doughnut-chart">
-      <h2>Activity Breakdown (Distribution)</h2>
+      <h2>Activity Breakdown Distribution</h2>
       <PieChart 
           series={[{ data: activityData.length > 0 ? activityData : [{ id: 0, value: 1, label: 'No Activities' }], innerRadius: 40 }]} 
           width={400}

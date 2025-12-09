@@ -40,7 +40,7 @@ export default function BasicPie({ numDays = 7 }) {
 
   return (
     <div className="pie-chart">
-      <h2>Activity Breakdown (Duration)</h2>
+      <h2>Activity Breakdown Duration (mins)</h2>
       <PieChart
         series={[
           {
