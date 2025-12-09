@@ -19,7 +19,7 @@ const getOrdinalSuffix = (n) => {
   return s[(v - 20) % 10] || s[v] || s[0];
 };
 
-export default function CustomLineChart({ label, numDays = 7, metricType }) {
+export default function CustomLineChart({ label, numDays, metricType }) {
   const [metricData, setMetricData] = useState([]);
 
   // Load health metric from localStorage based on metricType and numDays

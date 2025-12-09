@@ -27,9 +27,9 @@ function Dashboard() {
                     <CaloriesCard />
                     <SleepCard />
                     <CustomLineChart label = {"Weekly Steps Overview"} numDays={7} metricType={"steps"}/>
-                    <PieChart />
-                    <DoughnutChart />
-                    <AreaChart />
+                    <PieChart numDays={7}/>
+                    <DoughnutChart numDays={7}/>
+                    <AreaChart label = {"Calories Burned Overview"} numDays={7} metricType={"steps"}/>
                 </div>
             </main>
         </div>

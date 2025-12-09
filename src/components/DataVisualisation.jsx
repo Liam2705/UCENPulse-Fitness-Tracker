@@ -88,7 +88,7 @@ const DataVisualization = () => {
             <Tab label="Activities" />
             <Tab label="Distribution" />
           </Tabs>
-          <CustomLineChart label={lineGraphLabel} numDays={timeMetric} metricType={"steps"} />
+          <CustomLineChart label={lineGraphLabel} numDays={timeMetric} metricType={healthMetric} />
         </Paper>
       </Container>
     </div>

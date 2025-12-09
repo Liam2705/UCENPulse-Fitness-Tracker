@@ -1,38 +1,51 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
-import { useDrawingArea } from '@mui/x-charts/hooks';
 import { styled } from '@mui/material/styles';
 
-const data = [
-  { value: 5, label: 'Running' },
-  { value: 10, label: 'Swimming' },
-  { value: 15, label: 'Cycling' },
-  { value: 20, label: 'Gym' },
-];
-
-const size = {
-  width: 200,
-  height: 200,
+const getPastDays = (numDays) => {
+  const dates = [];
+  for (let i = numDays - 1; i >= 0; i--) {
+    const date = new Date();
+    date.setDate(date.getDate() - i);
+    dates.push(date.toISOString().split('T')[0]);
+  }
+  return dates;
 };
 
-const StyledText = styled('text')(({ theme }) => ({
-  fill: theme.palette.text.primary,
-  textAnchor: 'middle',
-  dominantBaseline: 'central',
-  fontSize: 20,
-}));
+export default function DoughnutChart({ numDays = 7 }) {
+  const [activityData, setActivityData] = useState([]);
 
+  useEffect(() => {
+    const activities = JSON.parse(localStorage.getItem('activities')) || [];
+    const pastDays = getPastDays(numDays);
 
+    const filteredActivities = activities.filter(activity => 
+      pastDays.includes(activity.date)
+    );
 
-export default function DoughnutChart() {
+    const activityCount = filteredActivities.reduce((acc, activity) => {
+      acc[activity.activityType] = (acc[activity.activityType] || 0) + 1; 
+      return acc;
+    }, {});
+
+    const doughnutData = Object.entries(activityCount).map(([label, value], index) => ({
+      id: index,
+      value,
+      label,
+    }));
+
+    setActivityData(doughnutData);
+  }, [numDays]);
+
   return (
     <div className="doughnut-chart">
-        <h2>Test Label</h2>
-        <PieChart 
-            series={[{ data, innerRadius: 40 }]} 
-            width={400}
-            height={300}>
-        </PieChart>
+      <h2>Activity Breakdown (Distribution)</h2>
+      <PieChart 
+          series={[{ data: activityData.length > 0 ? activityData : [{ id: 0, value: 1, label: 'No Activities' }], innerRadius: 40 }]} 
+          width={400}
+          height={300}
+      />
     </div>
   );
 }

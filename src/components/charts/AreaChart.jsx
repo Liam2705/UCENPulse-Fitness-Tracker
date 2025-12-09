@@ -1,10 +1,9 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { LineChart, lineElementClasses } from '@mui/x-charts/LineChart';
 import Box from '@mui/material/Box';
 
 const margin = { right: 24 };
-const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
-
 
 const getOrdinalSuffix = (n) => {
     const s = ["th", "st", "nd", "rd"];
@@ -12,29 +11,44 @@ const getOrdinalSuffix = (n) => {
     return s[(v - 20) % 10] || s[v] || s[0];
 };
 
-// Helper function to get the last 7 days as Date objects
-const getPastSevenDays = () => {
-    const dates = [];
-    for (let i = 6; i >= 0; i--) {
-        const date = new Date();
-        date.setDate(date.getDate() - i);
-        dates.push(date);
-    }
-    return dates;
+const getPastDays = (numDays) => {
+  const dates = [];
+  for (let i = numDays - 1; i >= 0; i--) {
+    const date = new Date();
+    date.setDate(date.getDate() - i);
+    dates.push(date);
+  }
+  return dates;
 };
 
-const daysData = getPastSevenDays();
+export default function AreaChart({label, numDays = 7, metricType}) {
+
+    const [metricData, setMetricData] = useState([]);
+    const daysData = getPastDays(numDays);
+    
+      // Load health metric from localStorage based on metricType and numDays
+      useEffect(() => {
+        const existingMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
+        const pastDays = getPastDays(numDays);
+        
+        const dataForPastDays = pastDays.map(date => {
+          const formattedDate = date.toISOString().split('T')[0];
+          const metrics = existingMetrics.find(metric => metric.date === formattedDate);
+          return metrics ? metrics[metricType] : 0;
+        });
+    
+        setMetricData(dataForPastDays);
+      }, [numDays, metricType]);
 
 
-export default function AreaChart() {
     return (
         <div className="area-chart">
-            <h2>Calories Burned Overview</h2>
+            <h2>{label}</h2>
             <Box sx={{ width: '100%', height: 300 }}>
                 <LineChart
-                    series={[{ data: uData, label: 'Calories Burned', area: true, showMark: false, connectNulls: true }]}
+                    series={[{ data: metricData, label: label, area: true, showMark: false, connectNulls: true }]}
                     xAxis={[{
-                        scaleType: 'band', // Use 'band' for categorical data like days
+                        scaleType: 'band',
                         data: daysData,
                         valueFormatter: (date) => {
                             const day = date.getDate();
@@ -48,7 +62,6 @@ export default function AreaChart() {
                         },
                     }}
                     margin={margin}
-
                 />
             </Box>
         </div>
