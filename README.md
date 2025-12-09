@@ -1,16 +1,37 @@
-# React + Vite
+# 🫀 UCENPulse Fitness Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a fitness tracker designed for UCEN students to track their health and wellbeing data.
 
-Currently, two official plugins are available:
+## ✅ Features
+- Complete Dashboard with multiple graphs
+- Ability to log multiple activities
+- Log daily health metrics (steps, water intake, calories burned, sleep)
+- Analytics Page (Filter by metric and time)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠 How to Run
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Step 1: Clone the repository:
+```
+git clone https://github.com/Liam2705/UCENPulse-Fitness-Tracker.git
+```
+Step 2: Navigate to repository:
+- Windows:
+```
+cd .\UCENPulse-Fitness-Tracker\
+```
+- Mac + Linux:
+```
+cd UCENPulse-Fitness-Tracker
+```
+Step 3: Install Dependencies:
+```
+npm install
+```
+Step 4: Run:
+```
+npm run dev
+```
+## 🧰 Tools and Technologies
+- HTML, CSS, JS
+- React
+- Material UI
