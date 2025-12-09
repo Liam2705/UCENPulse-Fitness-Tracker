@@ -12,8 +12,9 @@ import {
   Tabs,
   Tab,
 } from '@mui/material';
-import { LineChart } from '@mui/x-charts';
 import CustomLineChart from '../components/charts/LineChart.jsx';
+import DoughnutChart from '../components/charts/DoughnutChart.jsx';
+import BasicPie from '../components/charts/PieChart.jsx';
 const DataVisualization = () => {
 
   const [value, setValue] = React.useState(0);
@@ -31,7 +32,20 @@ const DataVisualization = () => {
   // Dynamically changes graph label to current selection
   const lineGraphLabel = healthMetric.charAt(0).toUpperCase() + healthMetric.slice(1).replace(/([A-Z])/g, ' $1') + ' Overview';
 
+  const renderChart = () => {
+    switch (value) {
+      case 0: // Trends tab
+        return <CustomLineChart label={lineGraphLabel} numDays={timeMetric} metricType={healthMetric} />;
+      case 1: // Activities tab
+        return <BasicPie numDays={timeMetric} />;
+      case 2: // Distribution tab
+        return <DoughnutChart numDays={timeMetric} />;
+      default:
+        return null;
+    }
+  };
 
+  const disableMetricSelection = value === 1 || value === 2;
 
   return (
 
@@ -57,6 +71,7 @@ const DataVisualization = () => {
                 onChange={(e) => setHealthMetric(e.target.value)}
                 margin="normal"
                 sx={{ marginLeft: '10px' }}
+                disabled={disableMetricSelection}
               >
                 <MenuItem value="steps">Steps</MenuItem>
                 <MenuItem value="waterIntake">Water Intake</MenuItem>
@@ -88,7 +103,7 @@ const DataVisualization = () => {
             <Tab label="Activities" />
             <Tab label="Distribution" />
           </Tabs>
-          <CustomLineChart label={lineGraphLabel} numDays={timeMetric} metricType={healthMetric} />
+          {renderChart()}
         </Paper>
       </Container>
     </div>
