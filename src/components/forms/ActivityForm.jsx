@@ -19,7 +19,16 @@ const ActivityForm = () => {
   const [duration, setDuration] = useState('');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [notes, setNotes] = useState('');
+  const [caloriesBurned, setCaloriesBurned] = useState('');
   const [error, setError] = useState('');
+
+  // The MET values for different activities
+  const activityValues = {
+    Running: 9.8,
+    Cycling: 7.5,
+    Swimming: 7.0,
+    Gym: 5.0
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,9 +47,30 @@ const ActivityForm = () => {
 
     setError('');
 
-    const activityData = { activityType, duration: Number(duration), date, notes };
-    console.log(activityData);
+    const activityData = { activityType, duration: Number(duration), caloriesBurned, date, notes };
 
+    // Calculating the estimated calories burned based on activity type and duration using MET values
+    const MET = activityValues[activityType];
+    const weightKg = 70;
+    const calories = (MET * 3.5 * weightKg / 200) * Number(duration);
+    activityData.caloriesBurned = Math.round(calories);
+    setCaloriesBurned(activityData.caloriesBurned);
+
+    // Retrieve current metrics from localStorage
+    let healthMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
+    
+    // Find today's metrics entry
+    const todayMetricsIndex = healthMetrics.findIndex(data => data.date === currentDate);
+
+    if (todayMetricsIndex > -1) {
+        // Update the existing entry for current day
+        healthMetrics[todayMetricsIndex].caloriesBurned += activityData.caloriesBurned;
+    } else {
+        // Create a new entry if none exists for today
+        healthMetrics.push({ date: currentDate, steps: 0, waterIntake: 0, sleepHours: 0, caloriesBurned: activityData.caloriesBurned });
+    }
+
+    localStorage.setItem('healthMetrics', JSON.stringify(healthMetrics));
 
     const existingActivities = JSON.parse(localStorage.getItem('activities')) || [];
     existingActivities.push(activityData);
