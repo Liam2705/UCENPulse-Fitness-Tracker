@@ -9,6 +9,10 @@ import {
   Snackbar,
 } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
 
 export const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -35,12 +39,10 @@ const ActivityForm = () => {
     e.preventDefault();
     const currentDate = new Date().toISOString().split('T')[0];
 
-
     if (!activityType) {
-      setError('Activity Type must be selected.');
+      setError('Please select an activity type.');
       return;
     }
-
     if (duration < 1 || duration > 1440) {
       setError('Duration must be between 1 and 1440 minutes.');
       return;
@@ -104,21 +106,20 @@ const ActivityForm = () => {
           Record your workout and activities to track your fitness progress.
         </Typography>
         <form onSubmit={handleSubmit}>
-          <TextField
-            select
-            fullWidth
-            label="Activity Type *"
+          <FormLabel>Activity Type</FormLabel>
+          <RadioGroup
+            row
+            name="activity-type-group"
+            defaultValue={"Running"}
             value={activityType}
             onChange={(e) => setActivityType(e.target.value)}
-            margin="normal"
             error={!!error}
-            helperText={error.includes('ActivityType') ? error : ''}
           >
-            <MenuItem value="Running">Running</MenuItem>
-            <MenuItem value="Cycling">Cycling</MenuItem>
-            <MenuItem value="Swimming">Swimming</MenuItem>
-            <MenuItem value="Gym">Gym</MenuItem>
-          </TextField>
+            <FormControlLabel value="Running" control={<Radio size='large' />} label="Running" />
+            <FormControlLabel value="Cycling" control={<Radio size='large'/>} label="Cycling" />
+            <FormControlLabel value="Swimming" control={<Radio size='large'/>} label="Swimming" />
+            <FormControlLabel value="Gym" control={<Radio size='large'/>} label="Gym" />
+          </RadioGroup>
 
           <TextField
             type="number"
