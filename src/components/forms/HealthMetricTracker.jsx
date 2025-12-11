@@ -26,7 +26,7 @@ const HealthMetricTracker = () => {
   const [sleepHours, setSleepHours] = useState('');
   const [caloriesBurned, setCaloriesBurned] = useState('');
   const [error, setError] = useState('');
-
+  const [confirmation, setConfirmation] = useState(false);
 
   const currentDate = new Date().toISOString().split('T')[0];
   const existingMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
@@ -62,6 +62,8 @@ const HealthMetricTracker = () => {
 
     localStorage.setItem('healthMetrics', JSON.stringify(existingMetrics));
 
+    setConfirmation(true);
+    
     setSteps(0);
     setWaterIntake(0);
     setSleepHours(0);
@@ -72,6 +74,9 @@ const HealthMetricTracker = () => {
     setError('');
   };
 
+  const handleConfirmationClose = () => {
+    setConfirmation(false);
+  }
 
   return (
     <Container component="main" padding="10px">
@@ -176,6 +181,13 @@ const HealthMetricTracker = () => {
           {error}
         </Alert>
       </Snackbar>
+
+      <Snackbar open={confirmation} autoHideDuration={6000} onClose={handleConfirmationClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+        <Alert onClose={handleClose} severity="success">
+          {"Metrics saved successfully!"}
+        </Alert>
+      </Snackbar>
+
     </Container>
   )
 }

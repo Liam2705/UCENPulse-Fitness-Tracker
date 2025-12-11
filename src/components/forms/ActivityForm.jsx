@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
 
-const Alert = React.forwardRef(function Alert(props, ref) {
+export const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
@@ -21,6 +21,7 @@ const ActivityForm = () => {
   const [notes, setNotes] = useState('');
   const [caloriesBurned, setCaloriesBurned] = useState('');
   const [error, setError] = useState('');
+  const [confirmation, setConfirmation] = useState(false);
 
   // The MET values for different activities
   const activityValues = {
@@ -77,6 +78,8 @@ const ActivityForm = () => {
 
     localStorage.setItem('activities', JSON.stringify(existingActivities));
 
+    setConfirmation(true);
+
     setActivityType('');
     setDuration('');
     setDate(new Date().toISOString().split('T')[0]);
@@ -86,6 +89,10 @@ const ActivityForm = () => {
   const handleClose = () => {
     setError('');
   };
+
+  const handleConfirmationClose = () => {
+    setConfirmation(false);
+  }
 
   return (
     <Container component="main" padding="10px">
@@ -158,6 +165,12 @@ const ActivityForm = () => {
       <Snackbar open={!!error} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
         <Alert onClose={handleClose} severity="error">
           {error}
+        </Alert>
+      </Snackbar>
+
+      <Snackbar open={confirmation} autoHideDuration={6000} onClose={handleConfirmationClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+        <Alert onClose={handleClose} severity="success">
+          {"Activity logged successfully!"}
         </Alert>
       </Snackbar>
     </Container>
