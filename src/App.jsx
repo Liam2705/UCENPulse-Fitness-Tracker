@@ -7,8 +7,8 @@ import Analytics from './pages/Analytics.jsx';
 
 function App() {
   return (
+    // Define application routes
     <>
-      // Define application routes
       <Routes>
         <Route path="/" element={<Dashboard/>}/>
         <Route path="/log-activity" element={<LogActivity/>}/>

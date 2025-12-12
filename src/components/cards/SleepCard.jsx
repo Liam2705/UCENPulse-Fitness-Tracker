@@ -8,6 +8,7 @@ const SleepCard = () => {
     const progress = (sleep / goal) * 100;
 
     return (
+        // Custom card for displaying hours sleep based on BaseCard props
         <div className="sleep-card">
             <BaseCard 
                 title="Sleep Hours"
