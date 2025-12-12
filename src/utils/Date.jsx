@@ -18,7 +18,7 @@ const DateDisplay = () => {
   };
 
   const formattedDate = currentDate.toLocaleDateString('en-UK', options);
-
+  // Handle popover open/close
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };

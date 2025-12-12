@@ -8,6 +8,7 @@ const CaloriesCard = () => {
     const progress = (calories / goal) * 100;
 
     return (
+        // Custom card for displaying calories burned based on BaseCard props
         <div className="calorie-card">
             <BaseCard 
                 title="Calories Burned"

@@ -1,5 +1,5 @@
 import { Card, CardContent, Typography, LinearProgress } from '@mui/material';
-
+// BaseCard component to display a card with title, value, progress bar, and icon
 const BaseCard = ({ title, value, progress, color, icon}) => {
     return (
         <Card

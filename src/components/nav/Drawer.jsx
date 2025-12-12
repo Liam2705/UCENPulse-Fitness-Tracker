@@ -31,7 +31,7 @@ export default function TemporaryDrawer() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    
     const metricGoals = { stepsGoal: stepsGoal, waterIntakeGoal: waterIntakeGoal, caloriesBurnedGoal: caloriesBurnedGoal, sleepHoursGoal: sleepHoursGoal };
     localStorage.setItem('metricGoals', JSON.stringify(metricGoals));
 

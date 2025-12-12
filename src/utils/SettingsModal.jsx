@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 
 const SettingsModal = ({open, handleClose}) => {    
+    // State variables for each health metric goal, initialized from localStorage if available
     const [stepsGoal, setStepsGoal] = useState(localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).stepsGoal : 0);
     const [waterIntakeGoal, setWaterIntakeGoal] = useState(localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).waterIntakeGoal : 0);
     const [caloriesBurnedGoal, setCaloriesBurnedGoal] = useState(localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).caloriesBurnedGoal : 0);
@@ -16,7 +17,7 @@ const SettingsModal = ({open, handleClose}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
+        // Save goals to localStorage
         const metricGoals = { stepsGoal: stepsGoal, waterIntakeGoal: waterIntakeGoal, caloriesBurnedGoal: caloriesBurnedGoal, sleepHoursGoal: sleepHoursGoal };
         localStorage.setItem('metricGoals', JSON.stringify(metricGoals));
 

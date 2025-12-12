@@ -14,6 +14,7 @@ import {
 import MuiAlert from '@mui/material/Alert';
 import getMetrics from '../../utils/getMetrics';
 
+// Alert component for Snackbar
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -32,6 +33,7 @@ const HealthMetricTracker = () => {
 
   const todayMetrics = existingMetrics.find(metric => metric.date === currentDate);
 
+  // If today's metrics do not exist, initialize them with 0 as the default value
   if (!todayMetrics) {
     const newMetrics = { date: currentDate, steps: 0, waterIntake: 0, sleepHours: 0, caloriesBurned: 0 };
     existingMetrics.push(newMetrics);
@@ -41,8 +43,10 @@ const HealthMetricTracker = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Get current date in YYYY-MM-DD format
     const currentDate = new Date().toISOString().split('T')[0];
 
+    // Validate inputs
     if (steps < 0 || waterIntake < 0 || sleepHours < 0 || caloriesBurned < 0) {
       setError('Fields cannot be negative. Please fill in all metrics.');
       return;
@@ -50,8 +54,10 @@ const HealthMetricTracker = () => {
 
     const healthMetrics = { date: currentDate, steps, waterIntake, sleepHours, caloriesBurned };
     const existingMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
+    // Check if today's metrics already exist by accessing the date property
     const todayMetricsIndex = existingMetrics.findIndex(metric => metric.date === currentDate);
 
+    // If they exist, update them; otherwise, add new entry
     if (todayMetricsIndex !== -1) {
       existingMetrics[todayMetricsIndex] = healthMetrics;
     } else {
@@ -59,10 +65,11 @@ const HealthMetricTracker = () => {
       existingMetrics.push(newMetrics);
     }
 
+    // Save back to localStorage
     localStorage.setItem('healthMetrics', JSON.stringify(existingMetrics));
-
+    // Show confirmation message
     setConfirmation(true);
-    
+    // Clear input fields
     setSteps(0);
     setWaterIntake(0);
     setSleepHours(0);

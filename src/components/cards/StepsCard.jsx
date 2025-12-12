@@ -9,6 +9,7 @@ const StepsCard = () => {
     const progress = (steps / goal) * 100;
 
     return (
+        // Custom card for displaying steps based on BaseCard props
         <div className="steps-card">
             <BaseCard 
                 title="Steps Today"

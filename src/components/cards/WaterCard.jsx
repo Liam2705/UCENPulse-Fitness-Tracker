@@ -8,6 +8,7 @@ const WaterCard = () => {
     const progress = (water / goal) * 100;
 
     return (
+        // Custom card for displaying water intake based on BaseCard props
         <div className="water-card">
             <BaseCard 
                 title="Water Intake"

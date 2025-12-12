@@ -86,6 +86,7 @@ const ActivityForm = () => {
     const existingActivities = JSON.parse(localStorage.getItem('activities')) || [];
     existingActivities.push(activityData);
 
+    // Save updated activities back to localStorage, display confirmation message, and reset form fields
     localStorage.setItem('activities', JSON.stringify(existingActivities));
 
     setConfirmation(true);

@@ -44,6 +44,7 @@ const DataVisualization = () => {
     }
   };
 
+  // Disable metric selection for Activities and Distribution tabs
   const disableMetricSelection = value === 1 || value === 2;
 
   return (

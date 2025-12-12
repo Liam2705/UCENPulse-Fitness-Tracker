@@ -4,12 +4,14 @@ import Box from '@mui/material/Box';
 
 const margin = { right: 24 };
 
+// Helper function to get ordinal suffix for a number (example: 1st, 2nd, 3rd, 4th)
 const getOrdinalSuffix = (n) => {
     const s = ["th", "st", "nd", "rd"];
     const v = n % 100;
     return s[(v - 20) % 10] || s[v] || s[0];
 };
 
+// Helper function to get dates for a given number of days based on the numDays prop
 const getPastDays = (numDays) => {
   const dates = [];
   for (let i = numDays - 1; i >= 0; i--) {
@@ -29,7 +31,7 @@ export default function AreaChart({label, numDays = 7, metricType}) {
       useEffect(() => {
         const existingMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
         const pastDays = getPastDays(numDays);
-        
+        // Map dates to corresponding metric values, defaulting to 0 if no data exists
         const dataForPastDays = pastDays.map(date => {
           const formattedDate = date.toISOString().split('T')[0];
           const metrics = existingMetrics.find(metric => metric.date === formattedDate);

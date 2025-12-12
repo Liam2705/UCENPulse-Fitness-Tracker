@@ -15,7 +15,7 @@ import AreaChart from '../components/charts/AreaChart.jsx';
 function Dashboard() {
 
     const isMobile = useMediaQuery({ query: '(max-width: 981px)' });
-
+    // Initialize default metricGoals in localStorage if they don't exist
     if (localStorage.getItem("metricGoals") === null) {
         const metricGoals = { stepsGoal: 10000, waterIntakeGoal: 2000, caloriesBurnedGoal: 1000, sleepHoursGoal: 8 };
         localStorage.setItem("metricGoals", JSON.stringify(metricGoals));

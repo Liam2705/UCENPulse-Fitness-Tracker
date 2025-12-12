@@ -11,6 +11,7 @@ function LogActivity() {
 
   return (
     <div className="dashboard-grid">
+                // Conditional rendering based on screen size
                 {isMobile ? <SidebarMobile /> : <Sidebar />}
                 <Header pageTitle={"Log an Activity"}/>
                 <main className="main-content">

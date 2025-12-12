@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { LineChart } from '@mui/x-charts/LineChart';
 
+// Helper function to get dates for a given number of days based on the numDays prop
 const getPastDays = (numDays) => {
   const dates = [];
   for (let i = numDays - 1; i >= 0; i--) {
@@ -25,7 +26,7 @@ export default function CustomLineChart({ label, numDays, metricType }) {
   useEffect(() => {
     const existingMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
     const pastDays = getPastDays(numDays);
-    
+    // Map dates to corresponding metric values, defaulting to 0 if no data exists
     const dataForPastDays = pastDays.map(date => {
       const formattedDate = date.toISOString().split('T')[0];
       const metrics = existingMetrics.find(metric => metric.date === formattedDate);
@@ -54,6 +55,7 @@ export default function CustomLineChart({ label, numDays, metricType }) {
         ]}
         yAxis={[
           {
+            // Customize y-axis labels based on metric type
             valueFormatter: (value) => {
               return metricType === 'waterIntake' ? `${value} ml` : `${value.toLocaleString()} ${metricType}`;
             },

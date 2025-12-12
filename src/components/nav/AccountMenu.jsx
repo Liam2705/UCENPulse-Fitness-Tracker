@@ -21,7 +21,7 @@ const AccountMenu = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
+        // Save the updated goals to localStorage
         const metricGoals = { stepsGoal: stepsGoal, waterIntakeGoal: waterIntakeGoal, caloriesBurnedGoal: caloriesBurnedGoal, sleepHoursGoal: sleepHoursGoal };
         localStorage.setItem('metricGoals', JSON.stringify(metricGoals));
 
@@ -42,7 +42,8 @@ const AccountMenu = () => {
                     </div>
                 </div>
             </div>
-            <SettingsModal 
+            <SettingsModal
+            // Pass functions as props to SettingsModal
                 open={open} 
                 handleClose={handleClose} 
                 onSubmit={handleSubmit} 
