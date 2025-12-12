@@ -23,7 +23,7 @@ const ActivityForm = () => {
   const [duration, setDuration] = useState('');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [notes, setNotes] = useState('');
-  const [caloriesBurned, setCaloriesBurned] = useState('');
+  const [caloriesBurned, setCaloriesBurned] = useState(0);
   const [error, setError] = useState('');
   const [confirmation, setConfirmation] = useState(false);
 
@@ -67,7 +67,13 @@ const ActivityForm = () => {
 
     const activityData = { activityType, duration: Number(duration), caloriesBurned, date, notes };
 
-    
+  // Calculating the estimated calories burned based on activity type and duration using MET values
+    const MET = activityValues[activityType];
+    const weightKg = 70;
+    const calories = (MET * 3.5 * weightKg / 200) * Number(duration);
+    activityData.caloriesBurned = Math.round(calories);
+    setCaloriesBurned(activityData.caloriesBurned);
+
 
     // Retrieve current metrics from localStorage
     let healthMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
@@ -77,7 +83,8 @@ const ActivityForm = () => {
 
     if (todayMetricsIndex > -1) {
         // Update the existing entry for current day
-        healthMetrics[todayMetricsIndex].caloriesBurned += activityData.caloriesBurned;
+        const existingCalories = healthMetrics[todayMetricsIndex].caloriesBurned || 0;
+        healthMetrics[todayMetricsIndex].caloriesBurned = existingCalories + activityData.caloriesBurned;
     } else {
         // Create a new entry if none exists for today
         healthMetrics.push({ date: currentDate, steps: 0, waterIntake: 0, sleepHours: 0, caloriesBurned: activityData.caloriesBurned });
@@ -96,6 +103,7 @@ const ActivityForm = () => {
     setDuration('');
     setDate(new Date().toISOString().split('T')[0]);
     setNotes('');
+    setCaloriesBurned(0);
   };
 
   const handleClose = () => {
