@@ -13,7 +13,7 @@ const CaloriesCard = () => {
                 title="Calories Burned"
                 value={calories}
                 progress={progress}
-                color="#F55E80"
+                color="#d13741"
                 icon={<img src={caloriesIcon} alt="Steps icon" style={{ width: 24, height: 24, marginRight: 8 }} />}
             >
             </BaseCard>

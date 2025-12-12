@@ -13,7 +13,7 @@ const SleepCard = () => {
                 title="Sleep Hours"
                 value={sleep}
                 progress={progress}
-                color="#8676FE"
+                color="#6554EE"
                 icon={<img src={sleepIcon} alt="Steps icon" style={{ width: 24, height: 24, marginRight: 8 }} />}
             >
             </BaseCard>

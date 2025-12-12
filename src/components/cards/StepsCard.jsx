@@ -14,7 +14,7 @@ const StepsCard = () => {
                 title="Steps Today"
                 value={steps}
                 progress={progress}
-                color="#1AB0B0"
+                color="#04842a"
                 icon={<img src={stepsIcon} alt="Steps icon" style={{ width: 24, height: 24, marginRight: 8 }} />}
             />
         </div>

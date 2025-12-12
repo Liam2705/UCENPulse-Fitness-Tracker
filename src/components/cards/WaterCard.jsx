@@ -13,7 +13,7 @@ const WaterCard = () => {
                 title="Water Intake"
                 value={water}
                 progress={progress}
-                color="#FF7443"
+                color="#2055D4"
                 icon={<img src={waterIcon} alt="Steps icon" style={{ width: 24, height: 24, marginRight: 8 }} />}
             >
             </BaseCard>

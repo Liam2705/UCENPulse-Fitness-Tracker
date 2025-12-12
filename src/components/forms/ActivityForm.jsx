@@ -113,7 +113,7 @@ const ActivityForm = () => {
             defaultValue={"Running"}
             value={activityType}
             onChange={(e) => setActivityType(e.target.value)}
-            error={!!error}
+            error={error}
           >
             <FormControlLabel value="Running" control={<Radio size='large' />} label="Running" />
             <FormControlLabel value="Cycling" control={<Radio size='large'/>} label="Cycling" />
