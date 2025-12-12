@@ -1,7 +1,5 @@
-import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
-import { styled } from '@mui/material/styles';
 
 const getPastDays = (numDays) => {
   const dates = [];

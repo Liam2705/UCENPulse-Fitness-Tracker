@@ -4,10 +4,8 @@ import {
   Box,
   TextField,
   MenuItem,
-  Button,
   Typography,
   Paper,
-  Snackbar,
   Divider,
   Tabs,
   Tab,
@@ -15,6 +13,7 @@ import {
 import CustomLineChart from '../charts/LineChart.jsx';
 import DoughnutChart from '../charts/DoughnutChart.jsx';
 import BasicPie from '../charts/PieChart.jsx';
+
 const DataVisualization = () => {
 
   const [value, setValue] = React.useState(0);

@@ -127,6 +127,11 @@
     color: var(--primary-colour);
 }
 
+.menu-item.active {
+    background-color: var(--accent-colour);
+    color: white;
+}
+
 .menu-icon {
     width: 20px;
     height: 20px;

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './styles/App.css'
 import {Dashboard} from './pages/Dashboard.jsx';
 import LogActivity from './pages/LogActivity.jsx';

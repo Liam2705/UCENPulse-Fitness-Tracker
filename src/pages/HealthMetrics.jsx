@@ -1,4 +1,3 @@
-import React from 'react'
 import '../styles/Dashboard.css'
 import { Sidebar } from '../components/nav/Sidebar'
 import { Header } from '../components/nav/Header'

@@ -1,5 +1,3 @@
-import React from 'react'
-
 const getMetrics = (metric) => {
     const currentDate = new Date().toISOString().split('T')[0]; // Get today's date
     const metricsData = JSON.parse(localStorage.getItem('healthMetrics'));

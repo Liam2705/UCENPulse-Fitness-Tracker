@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   Container,
   TextField,
-  MenuItem,
   Button,
   Typography,
   Paper,
@@ -66,14 +65,6 @@ const ActivityForm = () => {
     setError('');
 
     const activityData = { activityType, duration: Number(duration), caloriesBurned, date, notes };
-
-  // Calculating the estimated calories burned based on activity type and duration using MET values
-    const MET = activityValues[activityType];
-    const weightKg = 70;
-    const calories = (MET * 3.5 * weightKg / 200) * Number(duration);
-    activityData.caloriesBurned = Math.round(calories);
-    setCaloriesBurned(activityData.caloriesBurned);
-
 
     // Retrieve current metrics from localStorage
     let healthMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];

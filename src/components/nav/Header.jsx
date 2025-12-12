@@ -1,4 +1,3 @@
-import React from 'react';
 import Date from '../../utils/Date.jsx';
 
 function Header({ pageTitle }) {

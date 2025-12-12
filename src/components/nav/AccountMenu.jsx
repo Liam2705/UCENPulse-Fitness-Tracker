@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../../styles/Dashboard.css';
 import settings from '../../assets/images/settings.svg';
 import account from '../../assets/images/account.svg';

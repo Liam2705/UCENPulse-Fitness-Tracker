@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -16,15 +15,7 @@ import logActivity from '../../assets/images/log-activity.svg';
 import healthMetrics from '../../assets/images/health-metrics.svg';
 import analytics from '../../assets/images/analytics.svg';
 import settings from '../../assets/images/settings.svg';
-import AccountMenu from './AccountMenu';
 import SettingsModal from '../../utils/SettingsModal';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-} from '@mui/material';
 
 export default function TemporaryDrawer() {
   const [open, setOpen] = useState(false);
