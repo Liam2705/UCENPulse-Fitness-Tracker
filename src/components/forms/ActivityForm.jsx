@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   TextField,
@@ -35,6 +35,21 @@ const ActivityForm = () => {
     Gym: 5.0
   };
 
+  /* 
+  Calculating the estimated calories burned based on activity type and duration using MET values.
+  It it also used to dynamically update the estimated calories burned as user inputs data.
+  */
+  useEffect(() => {
+    if (activityType && duration) {
+      const MET = activityValues[activityType];
+      const weightKg = 70;
+      const calories = (MET * 3.5 * weightKg / 200) * Number(duration);
+      setCaloriesBurned(Math.round(calories));
+    } else {
+      setCaloriesBurned(0);
+    }
+  }, [activityType, duration]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const currentDate = new Date().toISOString().split('T')[0];
@@ -52,12 +67,7 @@ const ActivityForm = () => {
 
     const activityData = { activityType, duration: Number(duration), caloriesBurned, date, notes };
 
-    // Calculating the estimated calories burned based on activity type and duration using MET values
-    const MET = activityValues[activityType];
-    const weightKg = 70;
-    const calories = (MET * 3.5 * weightKg / 200) * Number(duration);
-    activityData.caloriesBurned = Math.round(calories);
-    setCaloriesBurned(activityData.caloriesBurned);
+    
 
     // Retrieve current metrics from localStorage
     let healthMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
@@ -131,6 +141,10 @@ const ActivityForm = () => {
             error={!!error}
             helperText={error.includes('Duration') ? error : ''}
           />
+
+          <Typography variant="body2" color="textSecondary" style={{ marginTop: '8px' }}>
+            Estimated calories burned: {caloriesBurned || 0} kcal
+          </Typography>
 
           <TextField
             type="date"
