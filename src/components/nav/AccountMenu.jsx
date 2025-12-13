@@ -37,7 +37,7 @@ const AccountMenu = () => {
                     <p className="menu-text">John Smith</p>
                     <div className="settings">
                         <button className="settings-button" onClick={handleOpen}>
-                            <img src={settings} className="settings-icon" />
+                            <img src={settings} alt='settings' className="settings-icon" />
                         </button>
                     </div>
                 </div>

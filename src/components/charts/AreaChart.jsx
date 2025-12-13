@@ -63,6 +63,7 @@ export default function AreaChart({label, numDays = 7, metricType}) {
                         },
                     }}
                     margin={margin}
+                    aria-label={`${label} Chart`}
                 />
             </Box>
         </div>

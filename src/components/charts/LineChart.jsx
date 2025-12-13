@@ -39,7 +39,7 @@ export default function CustomLineChart({ label, numDays, metricType }) {
   const daysData = getPastDays(numDays);
 
   return (
-    <div className="line-chart">
+    <div className="line-chart" role='region' >
       <h2>{label}</h2>
       <LineChart
         xAxis={[
@@ -72,6 +72,8 @@ export default function CustomLineChart({ label, numDays, metricType }) {
         ]}
         height={300}
         margin={{ left: 0, right: 0, top: 30, bottom: 30 }}
+        aria-label={`${label} Chart`}
+        
       />
     </div>
   );

@@ -44,6 +44,7 @@ export default function DoughnutChart({ numDays = 7 }) {
           series={[{ data: activityData.length > 0 ? activityData : [{ id: 0, value: 1, label: 'No Activities' }], innerRadius: 40 }]} 
           width={400}
           height={300}
+          aria-label={'Activity-Breakdown-Doughnut-Chart-Distribution'}
       />
     </div>
   );

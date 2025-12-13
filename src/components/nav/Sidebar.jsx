@@ -15,25 +15,25 @@ function Sidebar() {
                     <h3 className="menu-title">Menu</h3>
                     <a href="/" className="menu-text">
                         <li className={`menu-item ${location.pathname === '/' ? 'active' : ''}`}>
-                            <img src={dashboard} className="menu-icon" />
+                            <img src={dashboard} alt='dashboard' className="menu-icon" />
                             <p className="menu-text">Dashboard</p>
                         </li>
                     </a>
                     <a href="log-activity" className="menu-text">
                         <li className={`menu-item ${location.pathname === '/log-activity' ? 'active' : ''}`}>
-                            <img src={logActivity} className="menu-icon" />
+                            <img src={logActivity} alt='log-activity' className="menu-icon" />
                             <p href="log-activity" className="menu-text">Log Activity</p>
                         </li>
                     </a>
                     <a href="health-metrics" className="menu-text">
                         <li className={`menu-item ${location.pathname === '/health-metrics' ? 'active' : ''}`}>
-                            <img src={healthMetrics} className="menu-icon" />
+                            <img src={healthMetrics} alt='health-metrics' className="menu-icon" />
                             <p href="health-metrics" className="menu-text">Health Metrics</p>
                         </li>
                     </a>
                     <a href="analytics" className="menu-text">
                         <li className={`menu-item ${location.pathname === '/analytics' ? 'active' : ''}`}>
-                            <img src={analytics} className="menu-icon" />
+                            <img src={analytics} alt='analytics' className="menu-icon" />
                             <p href="analytics" className="menu-text">Analytics</p>
                         </li>
                     </a>

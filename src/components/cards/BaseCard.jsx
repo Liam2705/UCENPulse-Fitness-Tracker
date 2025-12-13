@@ -26,6 +26,8 @@ const BaseCard = ({ title, value, progress, color, icon}) => {
                 <LinearProgress 
                     variant="determinate" 
                     value={progress}
+                    role='progress-bar'
+                    aria-valuenow={progress}
                     sx={{ marginTop: 2, height: '5px', backgroundColor: 'rgba(255, 255, 255, 0.3)' }} 
                 />
                 <Typography variant="body2" color="white" sx={{ marginTop: 1 }}>

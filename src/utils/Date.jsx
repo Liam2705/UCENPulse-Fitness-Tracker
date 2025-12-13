@@ -30,7 +30,7 @@ const DateDisplay = () => {
         <Typography variant="h6" component="span" style={{ margin: '0 8px' }}>
           {formattedDate}
         </Typography>
-        <IconButton onClick={handleClick}>
+        <IconButton onClick={handleClick} role='img' title='chevron-down-arrow'>
           <KeyboardArrowDownIcon />
         </IconButton>
         <Popover

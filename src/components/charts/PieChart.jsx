@@ -52,6 +52,7 @@ export default function BasicPie({ numDays = 7 }) {
         ]}
         width={400}
         height={300}
+        aria-label={'Activity-Breakdown-Pie-Chart-Duration-mins'}
       />
     </div>
   );
