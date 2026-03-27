@@ -1,6 +1,6 @@
 import '../styles/Dashboard.css'
-import {Sidebar} from '../components/nav/Sidebar'
-import {Header} from '../components/nav/Header'
+import {Sidebar} from '../components/nav/Sidebar.jsx'
+import {Header} from '../components/nav/Header.jsx'
 import { useMediaQuery } from 'react-responsive'
 import {SidebarMobile} from '../components/nav/SidebarMobile.jsx';
 import ActivityForm from '../components/forms/ActivityForm.jsx';
@@ -11,7 +11,7 @@ function LogActivity() {
 
   return (
     <div className="dashboard-grid">
-                // Conditional rendering based on screen size
+                {/* Conditional rendering based on screen size */}
                 {isMobile ? <SidebarMobile /> : <Sidebar />}
                 <Header pageTitle={"Log an Activity"}/>
                 <main className="main-content">
