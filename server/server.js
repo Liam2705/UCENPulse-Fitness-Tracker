@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import indexRouter from './routes/index.js'
 import authRouter from './routes/authRoutes.js'
+import activityRouter from './routes/activityRoutes.js'
 
 // import config from .env file
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(express.json())
 
 app.use('/', indexRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/activities', activityRouter)
 
 
 app.listen(process.env.PORT, (err) => {
