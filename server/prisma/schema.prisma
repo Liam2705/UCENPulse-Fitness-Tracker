@@ -13,13 +13,44 @@ datasource db {
   provider = "postgresql"
 }
 
-model User{
-  id String @id @default(cuid())
-  email String @unique
+model User {
+  id        String @id @default(cuid())
+  email     String @unique
   firstName String
-  lastName String
-  password String
+  lastName  String
+  password  String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  activities    Activity[]
+  healthMetrics HealthMetric[]
+}
+
+model Activity {
+  id        String   @id @default(cuid())
+  type      String
+  duration  Int
+  calories  Int?
+  notes     String?
+  date      DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model HealthMetric {
+  id             String   @id @default(cuid())
+  steps          Int?
+  waterIntake    Float?
+  caloriesBurned Int?
+  sleepHours     Float?
+  date           DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  userId         String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

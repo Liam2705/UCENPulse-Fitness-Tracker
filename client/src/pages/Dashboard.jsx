@@ -11,6 +11,7 @@ import PieChart from '../components/charts/PieChart.jsx';
 import DoughnutChart from '../components/charts/DoughnutChart.jsx';
 import CustomLineChart from '../components/charts/LineChart.jsx';
 import AreaChart from '../components/charts/AreaChart.jsx';
+import useUser from '../hooks/useUser.js';
 
 function Dashboard() {
 
@@ -21,11 +22,12 @@ function Dashboard() {
         localStorage.setItem("metricGoals", JSON.stringify(metricGoals));
     }
 
+    const user = useUser()
 
     return (
         <div className="dashboard-grid">
             {isMobile ? <SidebarMobile /> : <Sidebar />}
-            <Header pageTitle={"Welcome Back!"} />
+            <Header pageTitle={`Welcome Back ${user?.firstName}!`} />
             <main className="main-content">
                 <div className="content-grid">
                     <StepsCard />
