@@ -1,6 +1,6 @@
 import '../styles/Dashboard.css'
-import { Sidebar } from '../components/nav/Sidebar.jsx'
-import { Header } from '../components/nav/Header.jsx'
+import { Sidebar } from '../components/nav/Sidebar'
+import { Header } from '../components/nav/Header'
 import { useMediaQuery } from 'react-responsive'
 import { SidebarMobile } from '../components/nav/SidebarMobile.jsx';
 import DataVisualization from '../components/forms/DataVisualisation.jsx'

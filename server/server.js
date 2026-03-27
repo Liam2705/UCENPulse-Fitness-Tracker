@@ -1,20 +1,17 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import indexRouter from './routes/index.js'
-import authRouter from './routes/authRoutes.js'
 
 // import config from .env file
 dotenv.config();
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:5173' }))
-app.use(express.json())
+app.use(cors({origin: 'http://localhost:5173'}))
 
-app.use('/', indexRouter)
-app.use('/api/auth', authRouter)
-
+app.get('/', (req, res) => {
+    res.send('Hello World')
+})
 
 app.listen(process.env.PORT, (err) => {
     if (err) {
