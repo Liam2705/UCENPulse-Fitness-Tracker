@@ -6,6 +6,7 @@ import HealthMetrics from './pages/HealthMetrics.jsx';
 import Analytics from './pages/Analytics.jsx';
 import Login from './pages/Login.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import Register from './pages/Register.jsx';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
     <>
       <Routes>
         {/* Public Routes */}
-        {/* <Route path='/register' /> */}
+        <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
 
         {/* Protected Routes */}

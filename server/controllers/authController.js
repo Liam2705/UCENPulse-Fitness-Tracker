@@ -1,9 +1,7 @@
-import pkg from '@prisma/client'
-const { PrismaClient } = pkg
+import prisma from '../config/db.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-const prisma = new PrismaClient();
 
 export const register = async (req, res) => {
     const { firstName, lastName, email, password } = req.body
@@ -24,7 +22,8 @@ export const login = async (req, res) => {
     const { email, password } = req.body
     try {
         // Lookup user by email
-        const user = prisma.user.findUnique({ where: { email } })
+        const user = await prisma.user.findUnique({ where: { email } })
+        console.log('user found:', user)
         if (!user) return res.status(401).json({ error: 'Invalid Credentials' })
 
         // Compare hashed password with the one entered on login
@@ -36,10 +35,13 @@ export const login = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '7d' }
         )
-        res.json({ token, user: { id: user.id, name: user.name, email: user.email } })
+        res.json({
+            token,
+            user: { id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email }
+        })
 
     } catch (error) {
-        res.status(500).json({ error: err.message })
+        res.status(500).json({ error: error.message })
     }
 }
 
