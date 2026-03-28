@@ -1,10 +1,7 @@
 import BaseCard from './BaseCard';
 import caloriesIcon from '../../assets/images/calories.svg';
-import getMetrics from '../../utils/getMetrics';
 
-const CaloriesCard = () => {
-    const calories = getMetrics('caloriesBurned');
-    const goal = localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).caloriesBurnedGoal : 100;
+const CaloriesCard = ({calories, goal}) => {
     const progress = (calories / goal) * 100;
 
     return (

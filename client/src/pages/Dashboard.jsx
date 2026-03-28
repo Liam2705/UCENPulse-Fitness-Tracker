@@ -12,17 +12,39 @@ import DoughnutChart from '../components/charts/DoughnutChart.jsx';
 import CustomLineChart from '../components/charts/LineChart.jsx';
 import AreaChart from '../components/charts/AreaChart.jsx';
 import useUser from '../hooks/useUser.js';
+import { useState, useEffect } from 'react';
+import { getMetrics, getGoals, getActivities } from '../services/api.js';
 
 function Dashboard() {
-
     const isMobile = useMediaQuery({ query: '(max-width: 981px)' });
-    // Initialize default metricGoals in localStorage if they don't exist
-    if (localStorage.getItem("metricGoals") === null) {
-        const metricGoals = { stepsGoal: 10000, waterIntakeGoal: 2000, caloriesBurnedGoal: 1000, sleepHoursGoal: 8 };
-        localStorage.setItem("metricGoals", JSON.stringify(metricGoals));
-    }
-
     const user = useUser()
+
+    const [loading, setLoading] = useState(true)
+    const [metrics, setMetrics] = useState([])
+    const [activities, setActivities] = useState([])
+    const [goals, setGoals] = useState({
+        stepsGoal: 10000,
+        waterGoal: 2.5,
+        caloriesGoal: 1000,
+        sleepGoal: 8
+    });
+
+    useEffect(() => {
+        Promise.all([getMetrics(), getGoals(), getActivities()])
+            .then(([metricsData, goalsData, activitiesData]) => {
+                setMetrics(metricsData);
+                setGoals(goalsData);
+                setActivities(activitiesData)
+                setLoading(false);
+            });
+    }, []);
+
+    // Gets the most recent metric entry
+    const latest = metrics.at(0) ?? {};
+
+    if (loading) return <div className="dashboard-loading">Loading...</div>
+
+
 
     return (
         <div className="dashboard-grid">
@@ -30,14 +52,14 @@ function Dashboard() {
             <Header pageTitle={`Welcome Back ${user?.firstName}!`} />
             <main className="main-content">
                 <div className="content-grid">
-                    <StepsCard />
-                    <WaterCard />
-                    <CaloriesCard />
-                    <SleepCard />
-                    <CustomLineChart label={"Weekly Steps Overview"} numDays={7} metricType={"steps"} />
-                    <PieChart numDays={7} />
-                    <DoughnutChart numDays={7} />
-                    <AreaChart label={"Calories Burned Overview"} numDays={7} metricType={"caloriesBurned"} />
+                    <StepsCard steps={latest.steps ?? 0} goal={goals.stepsGoal} />
+                    <WaterCard water={latest.waterIntake ?? 0} goal={goals.waterGoal} />
+                    <CaloriesCard calories={latest.caloriesBurned ?? 0} goal={goals.caloriesGoal} />
+                    <SleepCard sleep={latest.sleepHours ?? 0} goal={goals.sleepGoal} />
+                    <CustomLineChart label={"Weekly Steps Overview"} numDays={7} metricType={"steps"} metrics={metrics} />
+                    <PieChart numDays={7} activities={activities}/>
+                    <DoughnutChart numDays={7} activities={activities}/>
+                    <AreaChart label={"Calories Burned Overview"} numDays={7} metricType={"caloriesBurned"} metrics={metrics} />
                 </div>
             </main>
         </div>

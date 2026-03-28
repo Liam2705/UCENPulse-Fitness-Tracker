@@ -1,11 +1,10 @@
 import BaseCard from './BaseCard';
 import waterIcon from '../../assets/images/water.svg';
-import getMetrics from '../../utils/getMetrics';
 
-const WaterCard = () => {
-    const water = getMetrics('waterIntake');
-    const goal = localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).waterIntakeGoal : 2500;
+const WaterCard = ({water, goal}) => {
+    
     const progress = (water / goal) * 100;
+    
 
     return (
         // Custom card for displaying water intake based on BaseCard props

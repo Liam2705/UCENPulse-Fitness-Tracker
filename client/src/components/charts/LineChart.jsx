@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { LineChart } from '@mui/x-charts/LineChart';
 
 // Helper function to get dates for a given number of days based on the numDays prop
@@ -19,24 +18,15 @@ const getOrdinalSuffix = (n) => {
   return s[(v - 20) % 10] || s[v] || s[0];
 };
 
-export default function CustomLineChart({ label, numDays, metricType }) {
-  const [metricData, setMetricData] = useState([]);
-
-  // Load health metric from localStorage based on metricType and numDays
-  useEffect(() => {
-    const existingMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
-    const pastDays = getPastDays(numDays);
-    // Map dates to corresponding metric values, defaulting to 0 if no data exists
-    const dataForPastDays = pastDays.map(date => {
-      const formattedDate = date.toISOString().split('T')[0];
-      const metrics = existingMetrics.find(metric => metric.date === formattedDate);
-      return metrics ? metrics[metricType] : 0;
-    });
-
-    setMetricData(dataForPastDays);
-  }, [numDays, metricType]);
-
+export default function CustomLineChart({ label, numDays, metricType, metrics = [] }) {
   const daysData = getPastDays(numDays);
+
+  // Map each past day to a metric value from the DB data
+  const metricData = daysData.map(date => {
+    const dateStr = date.toISOString().split('T')[0];
+    const match = metrics.find(m => m.date?.split('T')[0] === dateStr);
+    return match ? (match[metricType] ?? 0) : 0;
+  });
 
   return (
     <div className="line-chart" role='region' >
@@ -73,7 +63,7 @@ export default function CustomLineChart({ label, numDays, metricType }) {
         height={300}
         margin={{ left: 0, right: 0, top: 30, bottom: 30 }}
         aria-label={`${label} Chart`}
-        
+
       />
     </div>
   );

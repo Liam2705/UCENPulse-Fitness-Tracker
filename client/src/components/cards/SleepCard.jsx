@@ -1,10 +1,7 @@
 import BaseCard from './BaseCard';
 import sleepIcon from '../../assets/images/sleep.svg';
-import getMetrics from '../../utils/getMetrics';
 
-const SleepCard = () => {
-    const sleep = getMetrics('sleepHours');
-    const goal = localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).sleepHoursGoal : 8;
+const SleepCard = ({sleep, goal}) => {
     const progress = (sleep / goal) * 100;
 
     return (

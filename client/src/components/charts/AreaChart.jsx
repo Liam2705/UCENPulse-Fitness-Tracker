@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { LineChart, lineElementClasses } from '@mui/x-charts/LineChart';
 import Box from '@mui/material/Box';
 
@@ -22,25 +21,14 @@ const getPastDays = (numDays) => {
   return dates;
 };
 
-export default function AreaChart({label, numDays = 7, metricType}) {
-
-    const [metricData, setMetricData] = useState([]);
+export default function AreaChart({label, numDays = 7, metricType, metrics = []}) {
     const daysData = getPastDays(numDays);
     
-      // Load health metric from localStorage based on metricType and numDays
-      useEffect(() => {
-        const existingMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
-        const pastDays = getPastDays(numDays);
-        // Map dates to corresponding metric values, defaulting to 0 if no data exists
-        const dataForPastDays = pastDays.map(date => {
-          const formattedDate = date.toISOString().split('T')[0];
-          const metrics = existingMetrics.find(metric => metric.date === formattedDate);
-          return metrics ? metrics[metricType] : 0;
-        });
-    
-        setMetricData(dataForPastDays);
-      }, [numDays, metricType]);
-
+    const metricData = daysData.map(date => {
+        const dateStr = date.toISOString().split('T')[0];
+        const match = metrics.find(m => m.date?.split('T')[0] === dateStr);
+        return match ? (match[metricType] ?? 0) : 0;
+    });
 
     return (
         <div className="area-chart">

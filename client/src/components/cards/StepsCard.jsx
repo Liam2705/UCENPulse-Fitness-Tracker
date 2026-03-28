@@ -1,11 +1,7 @@
 import BaseCard from './BaseCard';
 import stepsIcon from '../../assets/images/steps.svg';
-import getMetrics from '../../utils/getMetrics';
 
-const StepsCard = () => {
-
-    let steps = getMetrics('steps');
-    const goal = localStorage.getItem("metricGoals") ? JSON.parse(localStorage.getItem("metricGoals")).stepsGoal : 10000;
+const StepsCard = ({steps, goal}) => {
     const progress = (steps / goal) * 100;
 
     return (

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
 
 // Helper function to get dates for a given number of days based on the numDays prop
@@ -12,30 +11,26 @@ const getPastDays = (numDays) => {
   return dates;
 };
 
-export default function DoughnutChart({ numDays = 7 }) {
-  const [activityData, setActivityData] = useState([]);
+export default function DoughnutChart({ numDays = 7, activities = [] }) {
+  const pastDays = getPastDays(numDays);
 
-  useEffect(() => {
-    const activities = JSON.parse(localStorage.getItem('activities')) || [];
-    const pastDays = getPastDays(numDays);
-    // Filter activities to include only those within the past numDays
-    const filteredActivities = activities.filter(activity => 
-      pastDays.includes(activity.date)
-    );
-    // Count occurrences of each activity type
-    const activityCount = filteredActivities.reduce((acc, activity) => {
-      acc[activity.activityType] = (acc[activity.activityType] || 0) + 1; 
-      return acc;
-    }, {});
-    // Convert the activityCount object into an array suitable for the PieChart
-    const doughnutData = Object.entries(activityCount).map(([label, value], index) => ({
-      id: index,
-      value,
-      label,
-    }));
+  const filteredActivities = activities.filter(activity =>
+    pastDays.includes(activity.date?.split('T')[0])
+  );
 
-    setActivityData(doughnutData);
-  }, [numDays]);
+  // Count occurrences of each activity type
+  const activityCount = filteredActivities.reduce((acc, activity) => {
+    const key = activity.type  // ← was activity.activityType
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
+
+  // Convert the activityCount object into an array suitable for the PieChart
+  const activityData = Object.entries(activityCount).map(([label, value], index) => ({
+    id: index,
+    value,
+    label,
+  }));
 
   return (
     <div className="doughnut-chart">
