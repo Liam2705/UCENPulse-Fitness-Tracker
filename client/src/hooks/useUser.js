@@ -22,7 +22,7 @@ export default function useUser() {
     }
 
     fetchUser()
-  }, [])
+  }, [navigate])
 
   return user
 }

@@ -1,10 +1,14 @@
 import toast from 'react-hot-toast'
 
 export const logout = (navigate) => {
-  localStorage.removeItem('token')
-  localStorage.removeItem('user')
+  removeToken()
   toast.success('Logged out successfully')
   navigate('/login')
+}
+
+export const removeToken = () => {
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
 }
 
 export const getUser = () => {

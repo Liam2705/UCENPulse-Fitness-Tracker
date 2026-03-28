@@ -5,6 +5,7 @@ import indexRouter from './routes/index.js'
 import authRouter from './routes/authRoutes.js'
 import activityRouter from './routes/activityRoutes.js'
 import metricRouter from './routes/metricRoutes.js'
+import goalRouter from './routes/goalRoutes.js'
 
 // import config from .env file
 dotenv.config();
@@ -18,6 +19,7 @@ app.use('/', indexRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/activities', activityRouter)
 app.use('/api/metrics', metricRouter)
+app.use('/api/goals', goalRouter)
 
 
 app.listen(process.env.PORT, (err) => {

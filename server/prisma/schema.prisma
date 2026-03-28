@@ -25,6 +25,7 @@ model User {
 
   activities    Activity[]
   healthMetrics HealthMetric[]
+  goal          UserGoal?
 }
 
 model Activity {
@@ -51,6 +52,19 @@ model HealthMetric {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   userId         String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserGoal {
+  id             String   @id @default(cuid())
+  stepsGoal      Int      @default(10000)
+  waterGoal      Float    @default(2.5)    // litres (2.5 = 2500ml)
+  caloriesGoal   Int      @default(2000)
+  sleepGoal      Float    @default(8)      // hours (could be 8.5)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  userId         String   @unique
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
