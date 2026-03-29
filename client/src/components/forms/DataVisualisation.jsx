@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Box,
@@ -9,10 +9,12 @@ import {
   Divider,
   Tabs,
   Tab,
+  CircularProgress,
 } from '@mui/material';
 import CustomLineChart from '../charts/LineChart.jsx';
 import DoughnutChart from '../charts/DoughnutChart.jsx';
 import BasicPie from '../charts/PieChart.jsx';
+import { getMetrics, getActivities } from '../../services/api.js';
 
 const DataVisualization = () => {
 
@@ -24,21 +26,31 @@ const DataVisualization = () => {
     setValue(newValue);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  }
+  const [metrics, setMetrics] = useState([]);
+  const [activities, setActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([getMetrics(), getActivities()])
+      .then(([metricsData, activitiesData]) => {
+        setMetrics(metricsData);
+        setActivities(activitiesData);
+        setLoading(false);
+      });
+  }, []);
 
   // Dynamically changes graph label to current selection
   const lineGraphLabel = healthMetric.charAt(0).toUpperCase() + healthMetric.slice(1).replace(/([A-Z])/g, ' $1') + ' Overview';
 
   const renderChart = () => {
+    if (loading) return <CircularProgress sx={{ display: 'block', margin: '40px auto' }} />;
     switch (value) {
       case 0: // Trends tab
-        return <CustomLineChart label={lineGraphLabel} numDays={timeMetric} metricType={healthMetric} />;
+        return <CustomLineChart label={lineGraphLabel} numDays={timeMetric} metricType={healthMetric} metrics={metrics}/>;
       case 1: // Activities tab
-        return <BasicPie numDays={timeMetric} />;
+        return <BasicPie numDays={timeMetric} activities={activities} />;
       case 2: // Distribution tab
-        return <DoughnutChart numDays={timeMetric} />;
+        return <DoughnutChart numDays={timeMetric} activities={activities} />;
       default:
         return null;
     }

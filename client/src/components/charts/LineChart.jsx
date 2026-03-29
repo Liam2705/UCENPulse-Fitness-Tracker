@@ -47,7 +47,7 @@ export default function CustomLineChart({ label, numDays, metricType, metrics = 
           {
             // Customize y-axis labels based on metric type
             valueFormatter: (value) => {
-              return metricType === 'waterIntake' ? `${value} ml` : `${value.toLocaleString()} ${metricType}`;
+              return metricType === 'waterIntake' ? `${value} litres` : `${value.toLocaleString()} ${metricType}`;
             },
           },
         ]}
@@ -55,7 +55,7 @@ export default function CustomLineChart({ label, numDays, metricType, metrics = 
           {
             data: metricData,
             valueFormatter: (value) => {
-              return metricType === 'waterIntake' ? `${value} ml` : `${value.toLocaleString()} ${metricType}`;
+              return metricType === 'waterIntake' ? `${value} litres` : `${value.toLocaleString()} ${metricType}`;
             },
             connectNulls: true,
           },

@@ -40,7 +40,8 @@ function Dashboard() {
     }, []);
 
     // Gets the most recent metric entry
-    const latest = metrics.at(0) ?? {};
+    const todayStr = new Date().toISOString().split('T')[0]
+    const latest = metrics.find(m => m.date?.split('T')[0] === todayStr) ?? {}
 
     if (loading) return <div className="dashboard-loading">Loading...</div>
 
@@ -57,8 +58,8 @@ function Dashboard() {
                     <CaloriesCard calories={latest.caloriesBurned ?? 0} goal={goals.caloriesGoal} />
                     <SleepCard sleep={latest.sleepHours ?? 0} goal={goals.sleepGoal} />
                     <CustomLineChart label={"Weekly Steps Overview"} numDays={7} metricType={"steps"} metrics={metrics} />
-                    <PieChart numDays={7} activities={activities}/>
-                    <DoughnutChart numDays={7} activities={activities}/>
+                    <PieChart numDays={7} activities={activities} />
+                    <DoughnutChart numDays={7} activities={activities} />
                     <AreaChart label={"Calories Burned Overview"} numDays={7} metricType={"caloriesBurned"} metrics={metrics} />
                 </div>
             </main>

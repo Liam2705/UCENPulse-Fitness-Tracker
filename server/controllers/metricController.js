@@ -2,14 +2,29 @@ import prisma from "../config/db.js";
 
 export const createMetric = async (req, res) => {
     const { steps, waterIntake, caloriesBurned, sleepHours, date } = req.body
+    const targetDate = date ? new Date(date) : new Date()
+    const dateOnly = new Date(targetDate.toISOString().split('T')[0])
+
     try {
-        const metric = await prisma.healthMetric.create({
-            data: {
+        const metric = await prisma.healthMetric.upsert({
+            where: {
+                userId_date: {
+                    userId: req.user.userId,
+                    date: dateOnly
+                }
+            },
+            update: {
+                steps: steps ? parseInt(steps) : undefined,
+                waterIntake: waterIntake ? parseFloat(waterIntake) : undefined,
+                caloriesBurned: caloriesBurned ? parseInt(caloriesBurned) : undefined,
+                sleepHours: sleepHours ? parseFloat(sleepHours) : undefined,
+            },
+            create: {
                 steps: steps ? parseInt(steps) : null,
                 waterIntake: waterIntake ? parseFloat(waterIntake) : null,
                 caloriesBurned: caloriesBurned ? parseInt(caloriesBurned) : null,
                 sleepHours: sleepHours ? parseFloat(sleepHours) : null,
-                date: date ? new Date(date) : new Date(),
+                date: dateOnly,
                 userId: req.user.userId
             }
         })

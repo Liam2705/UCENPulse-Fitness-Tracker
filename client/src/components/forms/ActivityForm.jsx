@@ -12,6 +12,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
+import { createActivity } from '../../services/api.js';
 
 export const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -25,6 +26,7 @@ const ActivityForm = () => {
   const [caloriesBurned, setCaloriesBurned] = useState(0);
   const [error, setError] = useState('');
   const [confirmation, setConfirmation] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   // The MET values for different activities
   const activityValues = {
@@ -49,9 +51,8 @@ const ActivityForm = () => {
     }
   }, [activityType, duration]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const currentDate = new Date().toISOString().split('T')[0];
 
     if (!activityType) {
       setError('Please select an activity type.');
@@ -63,39 +64,29 @@ const ActivityForm = () => {
     }
 
     setError('');
+    setSubmitting(true);
 
-    const activityData = { activityType, duration: Number(duration), caloriesBurned, date, notes };
+    try {
+      await createActivity({
+        type: activityType,
+        duration: Number(duration),
+        calories: caloriesBurned,
+        notes,
+        date,
+      });
 
-    // Retrieve current metrics from localStorage
-    let healthMetrics = JSON.parse(localStorage.getItem('healthMetrics')) || [];
-    
-    // Find today's metrics entry
-    const todayMetricsIndex = healthMetrics.findIndex(data => data.date === currentDate);
-
-    if (todayMetricsIndex > -1) {
-        // Update the existing entry for current day
-        const existingCalories = healthMetrics[todayMetricsIndex].caloriesBurned || 0;
-        healthMetrics[todayMetricsIndex].caloriesBurned = existingCalories + activityData.caloriesBurned;
-    } else {
-        // Create a new entry if none exists for today
-        healthMetrics.push({ date: currentDate, steps: 0, waterIntake: 0, sleepHours: 0, caloriesBurned: activityData.caloriesBurned });
+      setConfirmation(true);
+      setActivityType('');
+      setDuration('');
+      setDate(new Date().toISOString().split('T')[0]);
+      setNotes('');
+      setCaloriesBurned(0);
+    } catch (error) {
+      console.error(error.message);
+      setError('Failed to save activity. Please try again.');
+    } finally {
+      setSubmitting(false);
     }
-
-    localStorage.setItem('healthMetrics', JSON.stringify(healthMetrics));
-
-    const existingActivities = JSON.parse(localStorage.getItem('activities')) || [];
-    existingActivities.push(activityData);
-
-    // Save updated activities back to localStorage, display confirmation message, and reset form fields
-    localStorage.setItem('activities', JSON.stringify(existingActivities));
-
-    setConfirmation(true);
-
-    setActivityType('');
-    setDuration('');
-    setDate(new Date().toISOString().split('T')[0]);
-    setNotes('');
-    setCaloriesBurned(0);
   };
 
   const handleClose = () => {
@@ -126,9 +117,9 @@ const ActivityForm = () => {
             error={error}
           >
             <FormControlLabel value="Running" control={<Radio size='large' />} label="Running" />
-            <FormControlLabel value="Cycling" control={<Radio size='large'/>} label="Cycling" />
-            <FormControlLabel value="Swimming" control={<Radio size='large'/>} label="Swimming" />
-            <FormControlLabel value="Gym" control={<Radio size='large'/>} label="Gym" />
+            <FormControlLabel value="Cycling" control={<Radio size='large' />} label="Cycling" />
+            <FormControlLabel value="Swimming" control={<Radio size='large' />} label="Swimming" />
+            <FormControlLabel value="Gym" control={<Radio size='large' />} label="Gym" />
           </RadioGroup>
 
           <TextField
@@ -169,6 +160,7 @@ const ActivityForm = () => {
           <Button
             type="submit"
             variant="contained"
+            disabled={submitting} //disables button whilst submitting
             fullWidth
             style={{ marginTop: '16px', backgroundColor: "var(--primary-colour)" }}
           >

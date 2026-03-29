@@ -53,6 +53,7 @@ model HealthMetric {
   updatedAt      DateTime @updatedAt
   userId         String
 
+  @@unique([userId, date])
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
