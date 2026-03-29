@@ -13,7 +13,11 @@ const headers = () => {
 export const getMetrics = () => {
     return fetch(`/api/metrics`, {
         headers: headers()
-    }).then(res => res.json())
+    }).then(async r => {
+        const json = await r.json()
+        if (!r.ok) throw json
+        return json
+    })
 }
 
 export const createMetric = (data) => {
@@ -21,14 +25,22 @@ export const createMetric = (data) => {
         method: 'POST',
         headers: headers(),
         body: JSON.stringify(data)
-    }).then(res => res.json())
+    }).then(async r => {
+        const json = await r.json()
+        if (!r.ok) throw json
+        return json
+    })
 }
 
 export const deleteMetric = (id) => {
     return fetch(`/api/metrics/${id}`, {
         method: 'DELETE',
         headers: headers(),
-    }).then(res => res.json())
+    }).then(async r => {
+        const json = await r.json()
+        if (!r.ok) throw json
+        return json
+    })
 }
 
 export const updateMetric = (id, data) => {
@@ -36,36 +48,56 @@ export const updateMetric = (id, data) => {
         method: 'DELETE',
         headers: headers(),
         body: JSON.stringify(data)
-    }).then(res => res.json())
+    }).then(async r => {
+        const json = await r.json()
+        if (!r.ok) throw json
+        return json
+    })
 }
 
 /*
     ACTIVITIES
 */
 export const getActivities = () => {
-    return fetch(`api/activities`, {
+    return fetch(`/api/activities`, {
         headers: headers()
-    }).then(r => r.json())
+    }).then(async r => {
+        const json = await r.json()
+        if (!r.ok) throw json
+        return json
+    })
 }
 export const createActivity = (data) => {
-    return fetch(`api/activities`, {
+    return fetch(`/api/activities`, {
         method: 'POST',
         headers: headers(),
         body: JSON.stringify(data)
-    }).then(r => r.json())
+    }).then(async r => {
+        const json = await r.json()
+        if (!r.ok) throw json
+        return json
+    })
 }
 export const updateActivity = (id, data) => {
-    return fetch(`api/activities/${id}`, {
+    return fetch(`/api/activities/${id}`, {
         method: 'PUT',
         headers: headers(),
         body: JSON.stringify(data)
-    }).then(r => r.json())
+    }).then(async r => {
+        const json = await r.json()
+        if (!r.ok) throw json
+        return json
+    })
 }
 export const deleteActivity = (id) => {
-    return fetch(`api/activities/${id}`, {
+    return fetch(`/api/activities/${id}`, {
         method: 'DELETE',
         headers: headers()
-    }).then(r => r.json())
+    }).then(async r => {
+        const json = await r.json()
+        if (!r.ok) throw json
+        return json
+    })
 }
 
 /*
@@ -74,7 +106,11 @@ export const deleteActivity = (id) => {
 export const getGoals = () => {
     return fetch('/api/goals', {
         headers: headers(),
-    }).then(res => res.json())
+    }).then(async r => {
+        const json = await r.json()
+        if (!r.ok) throw json
+        return json
+    })
 }
 
 export const updateGoals = (data) => {
@@ -82,7 +118,11 @@ export const updateGoals = (data) => {
         method: 'PUT',
         headers: headers(),
         body: JSON.stringify(data)
-    }).then(res => res.json())
+    }).then(async r => {
+        const json = await r.json()
+        if (!r.ok) throw json
+        return json
+    })
 }
 
 /**
@@ -93,5 +133,9 @@ export const getWeather = (lat, lon) => {
     const params = lat && lon ? `?lat=${lat}&lon=${lon}` : ''
     return fetch(`/api/weather${params}`, {
         headers: headers()
-    }).then(r => r.json())
+    }).then(async r => {
+        const json = await r.json()
+        if (!r.ok) throw json
+        return json
+    })
 }

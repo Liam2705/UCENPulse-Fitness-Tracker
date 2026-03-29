@@ -10,16 +10,21 @@ export const getGoals = async (req, res) => {
         res.json(goals)
 
     } catch (error) {
-        res.status(500).json({ error: error.message })
+        next(error)
     }
 
 }
 
 export const updateGoals = async (req, res) => {
-    const goals = await prisma.userGoal.upsert({
-        where: { userId: req.user.userId },
-        update: req.body,
-        create: { userId: req.user.userId, ...req.body }
-    })
-    res.json(goals)
+    try {
+        const goals = await prisma.userGoal.upsert({
+            where: { userId: req.user.userId },
+            update: req.body,
+            create: { userId: req.user.userId, ...req.body }
+        })
+        res.json(goals)
+    } catch (error) {
+        next(error)
+    }
+
 }

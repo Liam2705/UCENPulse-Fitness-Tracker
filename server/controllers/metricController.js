@@ -30,7 +30,7 @@ export const createMetric = async (req, res) => {
         })
         res.status(201).json(metric)
     } catch (error) {
-        res.status(500).json({ error: error.message })
+        next(error)
     }
 }
 
@@ -42,7 +42,7 @@ export const getMetric = async (req, res) => {
         })
         res.json(metrics)
     } catch (error) {
-        res.status(500).json({ error: error.message })
+        next(error)
     }
 }
 
@@ -66,8 +66,8 @@ export const updateMetric = async (req, res) => {
             }
         })
         res.json(updated)
-    } catch (err) {
-        res.status(500).json({ error: err.message })
+    } catch (error) {
+        next(error)
     }
 }
 
@@ -82,7 +82,7 @@ export const deleteMetric = async (req, res) => {
 
         await prisma.healthMetric.delete({ where: { id } })
         res.json({ message: 'Metric deleted successfully' })
-    } catch (err) {
-        res.status(500).json({ error: err.message })
+    } catch (error) {
+        next(error)
     }
 }

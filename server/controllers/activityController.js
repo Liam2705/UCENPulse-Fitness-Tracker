@@ -14,8 +14,8 @@ export const createActivity = async (req, res) => {
             }
         })
         res.status(201).json(activity)
-    } catch (err) {
-        res.status(500).json({ error: err.message })
+    } catch (error) {
+        next(error)
     }
 }
 
@@ -27,7 +27,7 @@ export const getActivity = async (req, res) => {
         })
         res.json(activities)
     } catch (error) {
-        res.status(500).json({ error: error.message })
+        next(error)
     }
 }
 
@@ -51,8 +51,8 @@ export const updateActivity = async (req, res) => {
       }
     })
     res.json(updated)
-  } catch (err) {
-    res.status(500).json({ error: err.message })
+  } catch (error) {
+    next(error)
   }
 }
 
@@ -66,7 +66,7 @@ export const deleteActivity = async (req, res) => {
 
     await prisma.activity.delete({ where: { id } })
     res.json({ message: 'Activity deleted successfully' })
-  } catch (err) {
-    res.status(500).json({ error: err.message })
+  } catch (error) {
+    next(error)
   }
 }

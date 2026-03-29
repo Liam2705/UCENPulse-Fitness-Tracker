@@ -16,6 +16,7 @@ const app = express();
 app.use(cors({ origin: 'http://localhost:5173' }))
 app.use(express.json())
 
+// Routes
 app.use('/', indexRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/activities', activityRouter)
@@ -23,6 +24,11 @@ app.use('/api/metrics', metricRouter)
 app.use('/api/goals', goalRouter)
 app.use('/api/weather', weatherRouter)
 
+//Global error handler
+app.use((err, req, res, next) => {
+    console.error(`[ERROR] ${req.method} ${req.path}:`, err.message)
+    res.status(err.status || 500).json({ error: err.message })
+})
 
 app.listen(process.env.PORT, (err) => {
     if (err) {
@@ -31,3 +37,4 @@ app.listen(process.env.PORT, (err) => {
     }
     console.log("server started on http://localhost:" + process.env.PORT)
 });
+
