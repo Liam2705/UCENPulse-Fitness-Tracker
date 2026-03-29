@@ -9,7 +9,7 @@ const headers = () => {
 
 /*
     METRICS
-*/ 
+*/
 export const getMetrics = () => {
     return fetch(`/api/metrics`, {
         headers: headers()
@@ -41,7 +41,7 @@ export const updateMetric = (id, data) => {
 
 /*
     ACTIVITIES
-*/ 
+*/
 export const getActivities = () => {
     return fetch(`api/activities`, {
         headers: headers()
@@ -70,7 +70,7 @@ export const deleteActivity = (id) => {
 
 /*
     GOALS
-*/ 
+*/
 export const getGoals = () => {
     return fetch('/api/goals', {
         headers: headers(),
@@ -83,4 +83,15 @@ export const updateGoals = (data) => {
         headers: headers(),
         body: JSON.stringify(data)
     }).then(res => res.json())
+}
+
+/**
+ * WEATHER API
+ */
+
+export const getWeather = (lat, lon) => {
+    const params = lat && lon ? `?lat=${lat}&lon=${lon}` : ''
+    return fetch(`/api/weather${params}`, {
+        headers: headers()
+    }).then(r => r.json())
 }
