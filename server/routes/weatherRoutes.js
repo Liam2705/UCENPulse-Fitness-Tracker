@@ -15,8 +15,14 @@ router.get('/', async (req, res) => {
       `&timezone=auto`
 
     const response = await fetch(url)
+
+    if (!response.ok) {
+      return res.status(503).json({ error: 'Weather service unavailable' })
+    }
+
     const data = await response.json()
     res.json(data)
+    
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch weather data' })
   }

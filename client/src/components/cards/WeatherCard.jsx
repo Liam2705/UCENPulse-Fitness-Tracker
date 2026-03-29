@@ -13,20 +13,34 @@ const weatherIcons = {
 
 export default function HeaderWeather() {
   const [weather, setWeather] = useState(null)
+  const [weatherError, setWeatherError] = useState(false)
 
   useEffect(() => {
     const fetchWeather = (lat, lon) =>
-      getWeather(lat, lon).then(data => setWeather(data.current))
+      getWeather(lat, lon)
+        .then(data => {
+          if (data.current) {
+            setWeather(data.current)
+          } else {
+            setWeatherError(true)
+          }
+        })
+        .catch(() => setWeatherError(true))
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        pos => fetchWeather(pos.coords.latitude, pos.coords.longitude),
+    navigator.geolocation
+      ? navigator.geolocation.getCurrentPosition(
+        p => fetchWeather(p.coords.latitude, p.coords.longitude),
         () => fetchWeather()
       )
-    } else {
-      fetchWeather()
-    }
+      : fetchWeather()
   }, [])
+
+
+  if (weatherError) return (
+    <div className="header-weather weather-unavailable">
+      <span>Weather unavailable</span>
+    </div>
+  )
 
   if (!weather) return null
 
