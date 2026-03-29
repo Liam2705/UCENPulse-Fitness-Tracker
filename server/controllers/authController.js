@@ -23,7 +23,6 @@ export const login = async (req, res) => {
     try {
         // Lookup user by email
         const user = await prisma.user.findUnique({ where: { email } })
-        console.log('user found:', user)
         if (!user) return res.status(401).json({ error: 'Invalid Credentials' })
 
         // Compare hashed password with the one entered on login

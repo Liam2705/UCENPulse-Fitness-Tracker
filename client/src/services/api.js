@@ -77,8 +77,8 @@ export const getGoals = () => {
     }).then(res => res.json())
 }
 
-export const updateGoals = (id, data) => {
-    return fetch(`/api/goals/${id}`, {
+export const updateGoals = (data) => {
+    return fetch(`/api/goals`, {
         method: 'PUT',
         headers: headers(),
         body: JSON.stringify(data)

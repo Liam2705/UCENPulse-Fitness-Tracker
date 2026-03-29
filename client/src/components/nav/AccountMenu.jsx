@@ -9,32 +9,9 @@ import { LogoutOutlined } from '@mui/icons-material'
 import { IconButton, Tooltip } from '@mui/material'
 import useUser from '../../hooks/useUser'
 
-const AccountMenu = () => {
+const AccountMenu = ({ onGoalsUpdated }) => {
     const navigate = useNavigate()
-
-    const [open, setOpen] = useState(false);
-    const [stepsGoal, setStepsGoal] = useState(localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).stepsGoal : 0);
-    const [waterIntakeGoal, setWaterIntakeGoal] = useState(localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).waterIntakeGoal : 0);
-    const [caloriesBurnedGoal, setCaloriesBurnedGoal] = useState(localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).caloriesBurnedGoal : 0);
-    const [sleepHoursGoal, setSleepHoursGoal] = useState(localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).sleepHoursGoal : 0);
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Save the updated goals to localStorage
-        const metricGoals = { stepsGoal: stepsGoal, waterIntakeGoal: waterIntakeGoal, caloriesBurnedGoal: caloriesBurnedGoal, sleepHoursGoal: sleepHoursGoal };
-        localStorage.setItem('metricGoals', JSON.stringify(metricGoals));
-
-        handleClose();
-    };
-
+    const [open, setOpen] = useState(false)
     const user = useUser()
 
     return (
@@ -46,7 +23,7 @@ const AccountMenu = () => {
                     <p className="menu-text">{user?.firstName} {user?.lastName}</p>
                     <div className="settings">
                         <Tooltip title="Settings">
-                            <button className="settings-button" onClick={handleOpen}>
+                            <button className="settings-button" onClick={() => setOpen(true)}>
                                 <img src={settings} alt='settings' className="menu-icon" />
                             </button>
                         </Tooltip>
@@ -58,9 +35,7 @@ const AccountMenu = () => {
                                     height: 36,
                                     borderRadius: '8px',
                                     color: '#838383',
-                                    '&:hover': {
-                                        backgroundColor: 'var(--accent-colour)',
-                                    }
+                                    '&:hover': { backgroundColor: 'var(--accent-colour)' }
                                 }}
                             >
                                 <LogoutOutlined sx={{ fontSize: 20 }} />
@@ -70,13 +45,13 @@ const AccountMenu = () => {
                 </div>
             </div>
             <SettingsModal
-                // Pass functions as props to SettingsModal
                 open={open}
-                handleClose={handleClose}
-                onSubmit={handleSubmit}
+                handleClose={() => {
+                    setOpen(false)
+                    onGoalsUpdated?.()
+                }}
             />
         </>
-
     )
 }
 

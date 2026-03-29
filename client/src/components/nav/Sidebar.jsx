@@ -38,7 +38,7 @@ function Sidebar() {
                         </li>
                     </a>
                 </ul>
-                <AccountMenu/>
+                <AccountMenu />
             </nav>
 
         </>
