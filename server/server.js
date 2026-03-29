@@ -7,6 +7,8 @@ import activityRouter from './routes/activityRoutes.js'
 import metricRouter from './routes/metricRoutes.js'
 import goalRouter from './routes/goalRoutes.js'
 import weatherRouter from './routes/weatherRoutes.js'
+import swaggerUi from 'swagger-ui-express'
+import swaggerSpec from './config/swagger.js'
 
 // import config from .env file
 dotenv.config();
@@ -23,6 +25,8 @@ app.use('/api/activities', activityRouter)
 app.use('/api/metrics', metricRouter)
 app.use('/api/goals', goalRouter)
 app.use('/api/weather', weatherRouter)
+
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 //Global error handler
 app.use((err, req, res, next) => {
