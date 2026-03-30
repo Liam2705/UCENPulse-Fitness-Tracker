@@ -16,28 +16,29 @@ import healthMetrics from '../../assets/images/health-metrics.svg';
 import analytics from '../../assets/images/analytics.svg';
 import settings from '../../assets/images/settings.svg';
 import SettingsModal from '../../utils/SettingsModal';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { logout } from '../../utils/auth';
 
 export default function TemporaryDrawer() {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [stepsGoal, setStepsGoal] = useState(localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).stepsGoal : 0);
-  const [waterIntakeGoal, setWaterIntakeGoal] = useState(localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).waterIntakeGoal : 0);
-  const [caloriesBurnedGoal, setCaloriesBurnedGoal] = useState(localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).caloriesBurnedGoal : 0);
-  const [sleepHoursGoal, setSleepHoursGoal] = useState(localStorage.getItem('metricGoals') ? JSON.parse(localStorage.getItem('metricGoals')).sleepHoursGoal : 0);
 
   const handleClose = () => {
     setOpenModal(false);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    
-    const metricGoals = { stepsGoal: stepsGoal, waterIntakeGoal: waterIntakeGoal, caloriesBurnedGoal: caloriesBurnedGoal, sleepHoursGoal: sleepHoursGoal };
-    localStorage.setItem('metricGoals', JSON.stringify(metricGoals));
-
-    handleClose();
-  };
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout()
+    } catch (error) {
+      console.error('Logout error:', error)
+    } finally {
+      localStorage.removeItem('token')
+      navigate('/login')
+    }
+  }
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -78,9 +79,17 @@ export default function TemporaryDrawer() {
         <ListItem disablePadding>
           <ListItemButton onClick={handleClick}>
             <ListItemIcon>
-              <img src={settings} alt={'Settings Icon'} style={{ width: '24px', height: '24px' }} />
+              <img src={settings} alt={'Settings'} style={{ width: '24px', height: '24px' }} />
             </ListItemIcon>
             <ListItemText primary={'Settings'} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => { handleLogout(); setOpen(false); }}>
+            <ListItemIcon>
+              <LogoutIcon style={{ width: '24px', height: '24px' }} /> 
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
           </ListItemButton>
         </ListItem>
       </List>
@@ -98,7 +107,7 @@ export default function TemporaryDrawer() {
       <SettingsModal 
                 open={openModal} 
                 handleClose={handleClose} 
-                onSubmit={handleSubmit} 
+                
             />
     </>
   );
