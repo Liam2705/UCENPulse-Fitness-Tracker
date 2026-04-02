@@ -13,7 +13,7 @@ import swaggerSpec from './config/swagger.js'
 // import config from .env file
 dotenv.config();
 
-const app = express();
+export const app = express();
 
 app.use(cors({ origin: 'http://localhost:5173' }))
 app.use(express.json())

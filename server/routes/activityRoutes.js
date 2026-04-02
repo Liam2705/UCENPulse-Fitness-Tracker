@@ -9,7 +9,7 @@ const router = express.Router()
 router.use(protect) // these routes require auth
 
 // Server validation
-const activityValidation = [
+export const activityValidation = [
     body('type')
         .notEmpty().withMessage('Activity type is required')
         .trim()
